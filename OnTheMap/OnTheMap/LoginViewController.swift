@@ -59,12 +59,13 @@ class LoginViewController: UIViewController {
                 
                 if success {
                     
-                    print(String(data: data, encoding: NSUTF8StringEncoding)!)
+                    print(data)
+                    
+//                    let key = data["account"]!!["key"] as? Int
                     
                     
                     
-                    
-//                    self.getUserData(sessionID!)
+                    self.getUserData(5101850940)
                 } else {
                     print(errorString)
                 }
@@ -73,7 +74,7 @@ class LoginViewController: UIViewController {
 
     }
     
-    private func getSessionID(completionHandlerForToken: (success: Bool, data: NSData, errorString: String?) -> Void) {
+    private func getSessionID(completionHandlerForToken: (success: Bool, data: AnyObject, errorString: String?) -> Void) {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
         request.HTTPMethod = "POST"
@@ -87,14 +88,35 @@ class LoginViewController: UIViewController {
                 return
             }
             let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-            completionHandlerForToken(success: true, data: newData, errorString: nil)
+            
+            let parsedResult: AnyObject!
+            do {
+                parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
+            } catch {
+                print("Could not parse the data as JSON: '\(data)'")
+                return
+            }
+            
+//            print(parsedResult)
+            
+//            print(parsedResult["session"]!!["id"]!!)
+            
+            /* GUARD: Is the "sessionID" key in parsedResult? */
+//            guard let sessionID = parsedResult["session"] as? String else {
+//                print("Cannot find key session_id in \(parsedResult)")
+//                return
+//            }
+//            
+//            print(sessionID)
+
+            completionHandlerForToken(success: true, data: parsedResult, errorString: nil)
         }
         task.resume()
     }
     
-    private func getUserData(sessionID: String) {
+    private func getUserData(key: Int) {
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/\(sessionID)")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/\(key)")!)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error...
