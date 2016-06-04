@@ -64,3 +64,23 @@ extension LoginViewController: UITextFieldDelegate {
         view?.endEditing(true)
     }
 }
+
+// MARK: - LoginViewController (Configure UI)
+
+extension LoginViewController {
+    
+    func setUIEnabled(enabled: Bool) {
+        emailTextField.enabled = enabled
+        passwordTextField.enabled = enabled
+        loginButton.enabled = enabled
+        debugLabel.text = ""
+        debugLabel.enabled = enabled
+        
+        // adjust login button alpha
+        if enabled {
+            loginButton.alpha = 1.0
+        } else {
+            loginButton.alpha = 0.5
+        }
+    }
+}
