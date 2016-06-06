@@ -19,6 +19,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var debugLabel: UILabel!
     
+    let apiManager = UdacityAPIManager.sharedInstance()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,88 +49,35 @@ class LoginViewController: UIViewController {
              Steps for Authentication...
              https://docs.google.com/document/d/1MECZgeASBDYrbBg7RlRu9zBBLGd3_kfzsN-0FtURqn0/pub?embedded=true#h.x5crhfekac4e
              
-             Step 1: Create a request token
-             Step 2: Ask the user for permission via the API ("login")
-             Step 3: Create a session ID
-             
-             Extra Steps...
-             Step 4: Get the user id ;)
-             Step 5: Go to the next view!
+             Step 1: Create a session ID
+             Step 2: Get the user key
+             Step 3: Go to the next view!
              */
-            getSessionID({ (success, data, errorString) in
-                
+            
+            // STEP 1:
+            apiManager.getSessionID(emailTextField.text!, password: passwordTextField.text!, completionHandlerForToken: { (success, data, errorString) in
                 if success {
-                    
-                    print(data)
-                    
-//                    let key = data["account"]!!["key"] as? Int
-                    
-                    
-                    
-                    self.getUserData(5101850940)
+                    if let key = self.apiManager.userKey {
+                        // STEP 2:
+                        self.apiManager.getUserData(key, completionHanderForToken: { (success, data, errorString) in
+                            if success {
+                                // STEP 3:
+                                // Segue to new view controller (map view)
+
+                                print("\(self.apiManager.sessionID!)\n\(self.apiManager.userKey!)\n\(self.apiManager.firstName!) \(self.apiManager.lastName!)")
+                            } else {
+                                self.debugLabel.text = errorString
+                            }
+                        })
+                    }
                 } else {
-                    print(errorString)
+                    self.debugLabel.text = errorString
                 }
             })
         }
 
     }
-    
-    private func getSessionID(completionHandlerForToken: (success: Bool, data: AnyObject, errorString: String?) -> Void) {
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
-        request.HTTPMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"udacity\": {\"username\": \"cwafavre@gmail.com\", \"password\": \"Teeker1435\"}}".dataUsingEncoding(NSUTF8StringEncoding)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil { // Handle error…
-                completionHandlerForToken(success: false, data: data!, errorString: "ERROR")
-                return
-            }
-            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-            
-            let parsedResult: AnyObject!
-            do {
-                parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
-            } catch {
-                print("Could not parse the data as JSON: '\(data)'")
-                return
-            }
-            
-//            print(parsedResult)
-            
-//            print(parsedResult["session"]!!["id"]!!)
-            
-            /* GUARD: Is the "sessionID" key in parsedResult? */
-//            guard let sessionID = parsedResult["session"] as? String else {
-//                print("Cannot find key session_id in \(parsedResult)")
-//                return
-//            }
-//            
-//            print(sessionID)
-
-            completionHandlerForToken(success: true, data: parsedResult, errorString: nil)
-        }
-        task.resume()
-    }
-    
-    private func getUserData(key: Int) {
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/\(key)")!)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil { // Handle error...
-                return
-            }
-            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
-        }
-        task.resume()
-    }
 }
-
 
 // MARK: - LoginViewController (Notifications)
 
