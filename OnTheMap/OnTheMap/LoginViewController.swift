@@ -57,19 +57,17 @@ class LoginViewController: UIViewController {
             // STEP 1:
             apiManager.getSessionID(emailTextField.text!, password: passwordTextField.text!, completionHandlerForToken: { (success, data, errorString) in
                 if success {
-                    if let key = self.apiManager.userKey {
-                        // STEP 2:
-                        self.apiManager.getUserData(key, completionHanderForToken: { (success, data, errorString) in
-                            if success {
-                                // STEP 3:
-                                // Segue to new view controller (map view)
+                    // STEP 2:
+                    self.apiManager.getUserData({ (success, data, errorString) in
+                        if success {
+                            // STEP 3:
+                            // Segue to new view controller (map view)
 
-                                print("\(self.apiManager.sessionID!)\n\(self.apiManager.userKey!)\n\(self.apiManager.firstName!) \(self.apiManager.lastName!)")
-                            } else {
-                                self.debugLabel.text = errorString
-                            }
-                        })
-                    }
+                            print("\(self.apiManager.sessionID!)\n\(self.apiManager.userKey!)\n\(self.apiManager.firstName!) \(self.apiManager.lastName!)")
+                        } else {
+                            self.debugLabel.text = errorString
+                        }
+                    })
                 } else {
                     self.debugLabel.text = errorString
                 }

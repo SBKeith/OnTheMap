@@ -50,9 +50,9 @@ class UdacityAPIManager: NSObject {
         task.resume()
     }
     
-    func getUserData(key: String, completionHanderForToken: (success: Bool, data: AnyObject, errorString: String?) -> Void) {
+    func getUserData(completionHanderForToken: (success: Bool, data: AnyObject, errorString: String?) -> Void) {
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/\(key)")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/\(self.userKey)")!)
         
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error...
