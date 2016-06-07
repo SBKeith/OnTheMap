@@ -86,7 +86,3 @@ class UdacityAPIManager: NSObject {
         return Singleton.sharedInstance
     }
 }
-
-
-
-
