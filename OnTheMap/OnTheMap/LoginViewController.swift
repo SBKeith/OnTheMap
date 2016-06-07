@@ -20,6 +20,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var debugLabel: UILabel!
     
     let apiManager = UdacityAPIManager.sharedInstance()
+    let constants = Constants()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,11 @@ class LoginViewController: UIViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromAllNotifications()
+    }
+    
+    @IBAction func signUpButtonTapped(sender: UIButton) {
+        
+        UIApplication.sharedApplication().openURL(NSURL(string: constants.kUdacitySignUp)!)
     }
     
     @IBAction func loginButtonTapped(sender: UIButton) {

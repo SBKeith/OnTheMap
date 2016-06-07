@@ -18,6 +18,7 @@
 		D841BBDA1D02B90B00CA7894 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBD91D02B90B00CA7894 /* LoginViewController.swift */; };
 		D841BBDD1D02CDF800CA7894 /* LoginExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBDC1D02CDF800CA7894 /* LoginExtension.swift */; };
 		D841BBDF1D05739400CA7894 /* UdacityAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBDE1D05739400CA7894 /* UdacityAPIManager.swift */; };
+		D841BBE11D06926D00CA7894 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBE01D06926D00CA7894 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		D841BBD91D02B90B00CA7894 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D841BBDC1D02CDF800CA7894 /* LoginExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginExtension.swift; sourceTree = "<group>"; };
 		D841BBDE1D05739400CA7894 /* UdacityAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityAPIManager.swift; sourceTree = "<group>"; };
+		D841BBE01D06926D00CA7894 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				D841BBDE1D05739400CA7894 /* UdacityAPIManager.swift */,
+				D841BBE01D06926D00CA7894 /* Constants.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				D841BBDF1D05739400CA7894 /* UdacityAPIManager.swift in Sources */,
 				D841BBA81D02B71600CA7894 /* MainViewController.swift in Sources */,
 				D841BBA61D02B71600CA7894 /* AppDelegate.swift in Sources */,
+				D841BBE11D06926D00CA7894 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

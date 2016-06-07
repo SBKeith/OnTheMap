@@ -54,6 +54,9 @@
                                 <state key="normal" title="Don't have an account?  Sign Up">
                                     <color key="titleColor" red="1" green="1" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="signUpButtonTapped:" destination="7pz-jU-PJ6" eventType="touchUpInside" id="hrG-R9-UfQ"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cfg-6i-pH2" userLabel="debugLabel">
                                 <rect key="frame" x="300" y="429" width="0.0" height="0.0"/>

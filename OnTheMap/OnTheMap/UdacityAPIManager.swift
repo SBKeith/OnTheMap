@@ -12,6 +12,7 @@ class UdacityAPIManager: NSObject {
     
     // MARK: Properties
     var session = NSURLSession.sharedSession()
+    let constants = Constants()
     
     // Authentication state
     var sessionID: String? = nil
@@ -21,11 +22,11 @@ class UdacityAPIManager: NSObject {
     
     func getSessionID(email: String, password: String, completionHandlerForToken: (success: Bool, data: AnyObject, errorString: String?) -> Void) {
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
-        request.HTTPMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
+        let request = NSMutableURLRequest(URL: NSURL(string: constants.kSession)!)
+        request.HTTPMethod = constants.kMethod
+        request.addValue(constants.kApplication, forHTTPHeaderField: constants.kAccept)
+        request.addValue(constants.kApplication, forHTTPHeaderField: constants.kContent_type)
+        request.HTTPBody = constants.kHttpBody(email, password: password).dataUsingEncoding(NSUTF8StringEncoding)
         
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error…
@@ -52,7 +53,7 @@ class UdacityAPIManager: NSObject {
     
     func getUserData(completionHanderForToken: (success: Bool, data: AnyObject, errorString: String?) -> Void) {
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/\(self.userKey)")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(constants.kUserKey)\(self.userKey!)")!)
         
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error...
