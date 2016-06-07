@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		473FDC801D0715DD00F1788F /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473FDC7F1D0715DD00F1788F /* GCDBlackBox.swift */; };
 		D841BBA61D02B71600CA7894 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBA51D02B71600CA7894 /* AppDelegate.swift */; };
 		D841BBA81D02B71600CA7894 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBA71D02B71600CA7894 /* MainViewController.swift */; };
 		D841BBAB1D02B71600CA7894 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D841BBA91D02B71600CA7894 /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		473FDC7F1D0715DD00F1788F /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		D841BBA21D02B71600CA7894 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D841BBA51D02B71600CA7894 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D841BBA71D02B71600CA7894 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 		D841BBD81D02B89D00CA7894 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				473FDC7F1D0715DD00F1788F /* GCDBlackBox.swift */,
 				D841BBAC1D02B71600CA7894 /* Assets.xcassets */,
 				D841BBAE1D02B71600CA7894 /* LaunchScreen.storyboard */,
 				D841BBA51D02B71600CA7894 /* AppDelegate.swift */,
@@ -319,6 +322,7 @@
 				D841BBA81D02B71600CA7894 /* MainViewController.swift in Sources */,
 				D841BBA61D02B71600CA7894 /* AppDelegate.swift in Sources */,
 				D841BBE11D06926D00CA7894 /* Constants.swift in Sources */,
+				473FDC801D0715DD00F1788F /* GCDBlackBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--On The Map-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,9 +19,103 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="On The Map" id="lQi-aw-zkO">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="RKt-bp-PSq"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="ba5-h0-jFu"/>
+                            <barButtonItem image="pin" id="xkc-Uj-7pE"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="2625" y="154"/>
+        </scene>
+        <!--On The Map-->
+        <scene sceneID="WbQ-Il-XKN">
+            <objects>
+                <viewController id="xbZ-6t-naz" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sOw-rd-44Z"/>
+                        <viewControllerLayoutGuide type="bottom" id="aRU-oE-UNO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zIg-Pu-6HX">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="On The Map" id="uyw-H8-T4f">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="6Uj-ry-BYU"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="AsN-Zw-nIM"/>
+                            <barButtonItem image="pin" id="pbR-1Y-go2"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vs0-5q-Jbx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2625" y="840"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="DGG-GY-3Cy">
+            <objects>
+                <tabBarController storyboardIdentifier="kMainID" automaticallyAdjustsScrollViewInsets="NO" id="8hd-tl-Yuj" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="iVJ-dG-IXH">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Ht2-Y1-bTf" kind="relationship" relationship="viewControllers" id="WUc-p9-7SS"/>
+                        <segue destination="OYA-Ix-sxA" kind="relationship" relationship="viewControllers" id="2fc-vp-n4h"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1pK-hi-FZM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1041" y="451"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="caa-oe-gTh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ht2-Y1-bTf" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" image="map" id="D6g-gC-jnc"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bP3-Bn-R2c">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Ka5-1p-1Vg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kow-3y-MsB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1813" y="154"/>
+        </scene>
+        <!--List-->
+        <scene sceneID="Oqy-bG-i9Q">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZiM-kY-Tct" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OYA-Ix-sxA" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="List" image="list" id="zUK-op-5hf"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="erd-pc-aQH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xbZ-6t-naz" kind="relationship" relationship="rootViewController" id="uRB-ju-QkR"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="1813" y="840"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="list" width="22" height="20"/>
+        <image name="map" width="26" height="20"/>
+        <image name="pin" width="15" height="22"/>
+    </resources>
 </document>

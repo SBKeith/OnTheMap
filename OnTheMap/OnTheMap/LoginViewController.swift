@@ -68,6 +68,7 @@ class LoginViewController: UIViewController {
                         if success {
                             // STEP 3:
                             // Segue to new view controller (map view)
+                            self.completeLogin()
 
                             print("\(self.apiManager.sessionID!)\n\(self.apiManager.userKey!)\n\(self.apiManager.firstName!) \(self.apiManager.lastName!)")
                         } else {
@@ -80,6 +81,15 @@ class LoginViewController: UIViewController {
             })
         }
 
+    }
+    
+    private func completeLogin() {
+        performUIUpdatesOnMain {
+            self.debugLabel.text = ""
+            self.setUIEnabled(true)
+            let controller =  UIStoryboard.init(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("kMainID") as! UITabBarController
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
     }
 }
 
