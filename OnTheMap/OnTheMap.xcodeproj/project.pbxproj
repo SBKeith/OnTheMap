@@ -16,6 +16,9 @@
 		D841BBC61D02B71600CA7894 /* OnTheMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBC51D02B71600CA7894 /* OnTheMapUITests.swift */; };
 		D841BBD41D02B86100CA7894 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D841BBD31D02B86100CA7894 /* Login.storyboard */; };
 		D841BBDA1D02B90B00CA7894 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBD91D02B90B00CA7894 /* LoginViewController.swift */; };
+		D841BBDD1D02CDF800CA7894 /* LoginExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBDC1D02CDF800CA7894 /* LoginExtension.swift */; };
+		D841BBDF1D05739400CA7894 /* UdacityAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBDE1D05739400CA7894 /* UdacityAPIManager.swift */; };
+		D841BBE11D06926D00CA7894 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBE01D06926D00CA7894 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		D841BBC71D02B71600CA7894 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D841BBD31D02B86100CA7894 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		D841BBD91D02B90B00CA7894 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D841BBDC1D02CDF800CA7894 /* LoginExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginExtension.swift; sourceTree = "<group>"; };
+		D841BBDE1D05739400CA7894 /* UdacityAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityAPIManager.swift; sourceTree = "<group>"; };
+		D841BBE01D06926D00CA7894 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,7 @@
 		D841BBA41D02B71600CA7894 /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				D841BBDB1D02CDDB00CA7894 /* Extensions */,
 				D841BBD61D02B88B00CA7894 /* Model */,
 				D841BBD51D02B86B00CA7894 /* View */,
 				D841BBD71D02B89400CA7894 /* Controller */,
@@ -139,6 +146,8 @@
 		D841BBD61D02B88B00CA7894 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D841BBDE1D05739400CA7894 /* UdacityAPIManager.swift */,
+				D841BBE01D06926D00CA7894 /* Constants.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -161,6 +170,14 @@
 				D841BBB11D02B71600CA7894 /* Info.plist */,
 			);
 			name = Support;
+			sourceTree = "<group>";
+		};
+		D841BBDB1D02CDDB00CA7894 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D841BBDC1D02CDF800CA7894 /* LoginExtension.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +248,7 @@
 				TargetAttributes = {
 					D841BBA11D02B71600CA7894 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = L5YJU4WM22;
 					};
 					D841BBB51D02B71600CA7894 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -296,8 +314,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D841BBDA1D02B90B00CA7894 /* LoginViewController.swift in Sources */,
+				D841BBDD1D02CDF800CA7894 /* LoginExtension.swift in Sources */,
+				D841BBDF1D05739400CA7894 /* UdacityAPIManager.swift in Sources */,
 				D841BBA81D02B71600CA7894 /* MainViewController.swift in Sources */,
 				D841BBA61D02B71600CA7894 /* AppDelegate.swift in Sources */,
+				D841BBE11D06926D00CA7894 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,6 +460,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.touchtapapp.onthemap.OnTheMap;
@@ -450,6 +472,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.touchtapapp.onthemap.OnTheMap;
@@ -522,6 +545,7 @@
 				D841BBCC1D02B71600CA7894 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D841BBCD1D02B71600CA7894 /* Build configuration list for PBXNativeTarget "OnTheMapTests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +554,7 @@
 				D841BBCF1D02B71600CA7894 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D841BBD01D02B71600CA7894 /* Build configuration list for PBXNativeTarget "OnTheMapUITests" */ = {
 			isa = XCConfigurationList;
@@ -538,6 +563,7 @@
 				D841BBD21D02B71600CA7894 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
