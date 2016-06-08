@@ -12,6 +12,7 @@ class Constants: NSObject {
     
     // DATA
     var locations: [[String : AnyObject]] = []
+    var userDataArray: [[String: AnyObject]] = []
     
     // UDACITY SITE URLS
     let kUdacitySignUp = "https://www.udacity.com/account/auth#!/signup"
@@ -27,5 +28,13 @@ class Constants: NSObject {
     // Helper methods
     func kHttpBody(email: String, password: String) -> String {
         return "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}"
+    }
+    
+    // MARK: Shared Instance
+    class func sharedInstance() -> Constants {
+        struct Singleton {
+            static var sharedInstance = Constants()
+        }
+        return Singleton.sharedInstance
     }
 }

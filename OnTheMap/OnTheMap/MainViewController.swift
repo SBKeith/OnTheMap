@@ -14,7 +14,9 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
     let apiManager = ParseAPIManager.sharedInstance()
-    let constants = Constants()
+    let udacityAPI = UdacityAPIManager.sharedInstance()
+    let constants = Constants.sharedInstance()
+    var annotations = [MKPointAnnotation]()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -23,8 +25,11 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     
     func mapStudentCoordinates() {
         
+        // Reset data array to avoid stacking new data on top of old!
+        constants.userDataArray.removeAll()
+        self.mapView.removeAnnotations(annotations)
+        
         apiManager.getStudentLocations { (success, data, error) in
-            
             if success {
                 self.constants.locations = data as! [[String: AnyObject]]
             } else {
@@ -34,8 +39,6 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             
             // We will create an MKPointAnnotation for each dictionary in "locations". The
             // point f will be stored in this array, and then provided to the map view.
-            
-            var annotations = [MKPointAnnotation]()
             
             // The "locations" array is loaded with the sample data below. We are using the dictionaries
             // to create map annotations. This would be more stylish if the dictionaries were being
@@ -62,15 +65,32 @@ class MainViewController: UIViewController, MKMapViewDelegate {
                 annotation.subtitle = mediaURL
                 
                 // Finally we place the annotation in an array of annotations.
-                annotations.append(annotation)
+                self.annotations.append(annotation)
             }
             
             // When the array is complete, we add the annotations to the map.
-            
             dispatch_async(dispatch_get_main_queue(), {
-                
-                self.mapView.addAnnotations(annotations)
+                self.mapView.addAnnotations(self.annotations)
             })
+        }
+    }
+    
+    @IBAction func refreshMapButtonTapped(sender: UIBarButtonItem) {
+        
+        mapStudentCoordinates()
+    }
+    
+    @IBAction func logoutButtonTapped(sender: UIBarButtonItem) {
+        
+        let controller =  UIStoryboard.init(name: "Login", bundle: nil).instantiateViewControllerWithIdentifier("kLoginID")
+        self.presentViewController(controller, animated: true, completion: nil)
+        
+        udacityAPI.logUserOut { (success, data, errorString) in
+            if success {
+                // Show spinner?
+            } else {
+                print("Error with logout process...")
+            }
         }
     }
 

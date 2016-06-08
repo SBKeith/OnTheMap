@@ -10,7 +10,7 @@ import Foundation
 
 class ParseAPIManager: NSObject {
     
-    var userDataArray: [[String: AnyObject]] = []
+    let sharedConstants = Constants.sharedInstance()
     
     func getStudentLocations(completionHandler: (success: Bool, data: AnyObject?, error: String?) -> Void)  {
         
@@ -33,9 +33,9 @@ class ParseAPIManager: NSObject {
             }
             
             for dictionary in parsedResult["results"] as! [[String: AnyObject]] {
-                self.userDataArray.append(dictionary)
+                self.sharedConstants.userDataArray.append(dictionary)
             }
-            completionHandler(success: true, data: self.userDataArray, error: nil)
+            completionHandler(success: true, data: self.sharedConstants.userDataArray, error: nil)
         }
         task.resume()
     }

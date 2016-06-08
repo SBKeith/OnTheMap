@@ -9,7 +9,7 @@
         <!--Login View Controller-->
         <scene sceneID="UzA-jp-dvN">
             <objects>
-                <viewController id="7pz-jU-PJ6" customClass="LoginViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="kLoginID" id="7pz-jU-PJ6" customClass="LoginViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kDx-m1-LLe"/>
                         <viewControllerLayoutGuide type="bottom" id="m5k-1l-CpS"/>

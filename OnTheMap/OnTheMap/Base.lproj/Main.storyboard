@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8hd-tl-Yuj">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
@@ -34,9 +37,17 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="On The Map" id="lQi-aw-zkO">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="RKt-bp-PSq"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="RKt-bp-PSq">
+                            <connections>
+                                <action selector="logoutButtonTapped:" destination="BYZ-38-t0r" id="9Q8-re-6Gi"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="ba5-h0-jFu"/>
+                            <barButtonItem systemItem="refresh" id="ba5-h0-jFu">
+                                <connections>
+                                    <action selector="refreshMapButtonTapped:" destination="BYZ-38-t0r" id="Jac-mN-c68"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem image="pin" id="xkc-Uj-7pE"/>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -49,27 +60,66 @@
             <point key="canvasLocation" x="2625" y="154"/>
         </scene>
         <!--On The Map-->
-        <scene sceneID="WbQ-Il-XKN">
+        <scene sceneID="Y8h-ej-Qag">
             <objects>
-                <viewController id="xbZ-6t-naz" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="sOw-rd-44Z"/>
-                        <viewControllerLayoutGuide type="bottom" id="aRU-oE-UNO"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="zIg-Pu-6HX">
+                <tableViewController id="W4E-Pd-L8j" customClass="UserListTableViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ME7-l5-MOd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="On The Map" id="uyw-H8-T4f">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="6Uj-ry-BYU"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="kUserDetailsCell" id="5Fe-2C-eGs" customClass="CellLabelsUIView" customModule="OnTheMap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Fe-2C-eGs" id="OpK-LD-U0b">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9G-BE-nD7">
+                                            <rect key="frame" x="48" y="4" width="40" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin" translatesAutoresizingMaskIntoConstraints="NO" id="74N-jZ-BBn">
+                                            <rect key="frame" x="16" y="11" width="15" height="22"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="URL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwA-Uv-6cT">
+                                            <rect key="frame" x="48" y="22" width="28" height="17"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <color key="textColor" red="0.6705882353" green="0.6588235294" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="kwA-Uv-6cT" firstAttribute="leading" secondItem="G9G-BE-nD7" secondAttribute="leading" id="PjN-gD-9E6"/>
+                                        <constraint firstItem="74N-jZ-BBn" firstAttribute="centerY" secondItem="OpK-LD-U0b" secondAttribute="centerY" id="beN-dZ-Ohe"/>
+                                        <constraint firstItem="G9G-BE-nD7" firstAttribute="bottom" secondItem="OpK-LD-U0b" secondAttribute="centerY" id="e5G-fD-HQh"/>
+                                        <constraint firstItem="kwA-Uv-6cT" firstAttribute="top" secondItem="OpK-LD-U0b" secondAttribute="centerY" id="iGD-fc-ioy"/>
+                                        <constraint firstItem="G9G-BE-nD7" firstAttribute="leading" secondItem="74N-jZ-BBn" secondAttribute="trailing" multiplier="1.3" constant="8" symbolic="YES" id="mVT-vc-fqh"/>
+                                        <constraint firstItem="74N-jZ-BBn" firstAttribute="leading" secondItem="OpK-LD-U0b" secondAttribute="leadingMargin" constant="8" id="zil-FH-p8f"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="userNameLabel" destination="G9G-BE-nD7" id="u2K-nk-hEj"/>
+                                    <outlet property="userURLLabel" destination="kwA-Uv-6cT" id="z7m-7N-BLT"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="W4E-Pd-L8j" id="KP3-e6-EuF"/>
+                            <outlet property="delegate" destination="W4E-Pd-L8j" id="HBy-nH-rS6"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="On The Map" id="BWg-1m-kZD">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="hL4-Ct-zi6"/>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="AsN-Zw-nIM"/>
-                            <barButtonItem image="pin" id="pbR-1Y-go2"/>
+                            <barButtonItem systemItem="refresh" id="AKS-h6-Jjw"/>
+                            <barButtonItem image="pin" id="isU-qf-D6B"/>
                         </rightBarButtonItems>
                     </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vs0-5q-Jbx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9a1-xa-mzL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2625" y="840"/>
         </scene>
@@ -122,7 +172,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="xbZ-6t-naz" kind="relationship" relationship="rootViewController" id="uRB-ju-QkR"/>
+                        <segue destination="W4E-Pd-L8j" kind="relationship" relationship="rootViewController" id="har-Ol-f9H"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZiM-kY-Tct" userLabel="First Responder" sceneMemberID="firstResponder"/>
