@@ -10,6 +10,8 @@ import Foundation
 
 class ParseAPIManager: NSObject {
     
+    var userDataArray: [[String: AnyObject]] = []
+    
     func getStudentLocations(completionHandler: (success: Bool, data: AnyObject?, error: String?) -> Void)  {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
@@ -21,7 +23,19 @@ class ParseAPIManager: NSObject {
             if error != nil { // Handle error...
                 return
             }
-            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            
+            let parsedResult: AnyObject!
+            do {
+                parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
+            } catch {
+                print("Could not parse the data as JSON: '\(data)'")
+                return
+            }
+            
+            for dictionary in parsedResult["results"] as! [[String: AnyObject]] {
+                self.userDataArray.append(dictionary)
+            }
+            completionHandler(success: true, data: self.userDataArray, error: nil)
         }
         task.resume()
     }

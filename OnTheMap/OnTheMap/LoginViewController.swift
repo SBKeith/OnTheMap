@@ -70,7 +70,7 @@ class LoginViewController: UIViewController {
                             // Segue to new view controller (map view)
                             self.completeLogin()
 
-                            print("\(self.apiManager.sessionID!)\n\(self.apiManager.userKey!)\n\(self.apiManager.firstName!) \(self.apiManager.lastName!)")
+//                            print("\(self.apiManager.sessionID!)\n\(self.apiManager.userKey!)\n\(self.apiManager.firstName!) \(self.apiManager.lastName!)")
                         } else {
                             self.debugLabel.text = errorString
                         }
