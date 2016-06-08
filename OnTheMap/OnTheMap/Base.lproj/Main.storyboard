@@ -17,7 +17,21 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bev-Zv-dLU">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Rhe-ks-iMO"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bev-Zv-dLU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="JCd-Jk-7ot"/>
+                            <constraint firstItem="bev-Zv-dLU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="LDG-jE-rcc"/>
+                            <constraint firstAttribute="trailing" secondItem="bev-Zv-dLU" secondAttribute="trailing" id="VE0-nF-4RQ"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bev-Zv-dLU" secondAttribute="bottom" id="f55-v2-CuX"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="On The Map" id="lQi-aw-zkO">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="RKt-bp-PSq"/>
@@ -26,6 +40,9 @@
                             <barButtonItem image="pin" id="xkc-Uj-7pE"/>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="bev-Zv-dLU" id="2iz-FO-u0J"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -74,11 +91,11 @@
             </objects>
             <point key="canvasLocation" x="1041" y="451"/>
         </scene>
-        <!--Item-->
+        <!--Map-->
         <scene sceneID="caa-oe-gTh">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ht2-Y1-bTf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="map" id="D6g-gC-jnc"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" id="D6g-gC-jnc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bP3-Bn-R2c">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

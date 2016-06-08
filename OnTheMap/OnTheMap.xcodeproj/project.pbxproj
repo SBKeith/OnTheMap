@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		473FDC801D0715DD00F1788F /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473FDC7F1D0715DD00F1788F /* GCDBlackBox.swift */; };
+		473FDC821D07688200F1788F /* ParseAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473FDC811D07688200F1788F /* ParseAPIManager.swift */; };
 		D841BBA61D02B71600CA7894 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBA51D02B71600CA7894 /* AppDelegate.swift */; };
 		D841BBA81D02B71600CA7894 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBA71D02B71600CA7894 /* MainViewController.swift */; };
 		D841BBAB1D02B71600CA7894 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D841BBA91D02B71600CA7894 /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		473FDC7F1D0715DD00F1788F /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
+		473FDC811D07688200F1788F /* ParseAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAPIManager.swift; sourceTree = "<group>"; };
 		D841BBA21D02B71600CA7894 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D841BBA51D02B71600CA7894 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D841BBA71D02B71600CA7894 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				D841BBDE1D05739400CA7894 /* UdacityAPIManager.swift */,
+				473FDC811D07688200F1788F /* ParseAPIManager.swift */,
 				D841BBE01D06926D00CA7894 /* Constants.swift */,
 			);
 			name = Model;
@@ -316,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				473FDC821D07688200F1788F /* ParseAPIManager.swift in Sources */,
 				D841BBDA1D02B90B00CA7894 /* LoginViewController.swift in Sources */,
 				D841BBDD1D02CDF800CA7894 /* LoginExtension.swift in Sources */,
 				D841BBDF1D05739400CA7894 /* UdacityAPIManager.swift in Sources */,
