@@ -10,6 +10,9 @@ import Foundation
 
 class Constants: NSObject {
     
+    // DATA
+    var locations: [[String : AnyObject]] = []
+    
     // UDACITY SITE URLS
     let kUdacitySignUp = "https://www.udacity.com/account/auth#!/signup"
     let kSession = "https://www.udacity.com/api/session"

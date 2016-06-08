@@ -14,22 +14,26 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
     let apiManager = ParseAPIManager.sharedInstance()
-    var locations: [[String : AnyObject]] = []
+    let constants = Constants()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        mapStudentCoordinates()
+    }
     
+    func mapStudentCoordinates() {
+        
         apiManager.getStudentLocations { (success, data, error) in
             
             if success {
-                self.locations = data as! [[String: AnyObject]]
+                self.constants.locations = data as! [[String: AnyObject]]
             } else {
                 // Display error message
                 print("TEMP ERROR MESSAGE: NO LOCATIONS FOUND")
             }
             
             // We will create an MKPointAnnotation for each dictionary in "locations". The
-            // point annotations will be stored in this array, and then provided to the map view.
+            // point f will be stored in this array, and then provided to the map view.
             
             var annotations = [MKPointAnnotation]()
             
@@ -37,7 +41,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             // to create map annotations. This would be more stylish if the dictionaries were being
             // used to create custom structs. Perhaps StudentLocation structs.
             
-            for dictionary in self.locations {
+            for dictionary in self.constants.locations {
                 
                 // Notice that the float values are being used to create CLLocationDegree values.
                 // This is a version of the Double type.
@@ -62,10 +66,14 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             }
             
             // When the array is complete, we add the annotations to the map.
-            self.mapView.addAnnotations(annotations)
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                self.mapView.addAnnotations(annotations)
+            })
+        }
     }
-}
-    
+
     // MARK: - MKMapViewDelegate
     
     // Here we create a view with a "right callout accessory view". You might choose to look into other
@@ -86,7 +94,6 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         else {
             pinView!.annotation = annotation
         }
-        
         return pinView
     }
     
@@ -101,4 +108,3 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         }
     }
 }
-
