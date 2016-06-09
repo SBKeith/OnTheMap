@@ -23,6 +23,8 @@
 		D841BBDD1D02CDF800CA7894 /* LoginExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBDC1D02CDF800CA7894 /* LoginExtension.swift */; };
 		D841BBDF1D05739400CA7894 /* UdacityAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBDE1D05739400CA7894 /* UdacityAPIManager.swift */; };
 		D841BBE11D06926D00CA7894 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBE01D06926D00CA7894 /* Constants.swift */; };
+		D8C5B0651D093997000814AE /* UserLocation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8C5B0641D093997000814AE /* UserLocation.storyboard */; };
+		D8C5B0671D09451A000814AE /* UserLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C5B0661D09451A000814AE /* UserLocationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		D841BBDC1D02CDF800CA7894 /* LoginExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginExtension.swift; sourceTree = "<group>"; };
 		D841BBDE1D05739400CA7894 /* UdacityAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityAPIManager.swift; sourceTree = "<group>"; };
 		D841BBE01D06926D00CA7894 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D8C5B0641D093997000814AE /* UserLocation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserLocation.storyboard; sourceTree = "<group>"; };
+		D8C5B0661D09451A000814AE /* UserLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,7 @@
 			children = (
 				D841BBD31D02B86100CA7894 /* Login.storyboard */,
 				D841BBA91D02B71600CA7894 /* Main.storyboard */,
+				D8C5B0641D093997000814AE /* UserLocation.storyboard */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -176,6 +181,7 @@
 				D841BBD91D02B90B00CA7894 /* LoginViewController.swift */,
 				D841BBA71D02B71600CA7894 /* MainViewController.swift */,
 				4732A7061D08A57B00877738 /* UserListTableViewController.swift */,
+				D8C5B0661D09451A000814AE /* UserLocationViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -307,6 +313,7 @@
 			files = (
 				D841BBD41D02B86100CA7894 /* Login.storyboard in Resources */,
 				D841BBB01D02B71600CA7894 /* LaunchScreen.storyboard in Resources */,
+				D8C5B0651D093997000814AE /* UserLocation.storyboard in Resources */,
 				D841BBAD1D02B71600CA7894 /* Assets.xcassets in Resources */,
 				D841BBAB1D02B71600CA7894 /* Main.storyboard in Resources */,
 			);
@@ -335,6 +342,7 @@
 			files = (
 				473FDC821D07688200F1788F /* ParseAPIManager.swift in Sources */,
 				D841BBDA1D02B90B00CA7894 /* LoginViewController.swift in Sources */,
+				D8C5B0671D09451A000814AE /* UserLocationViewController.swift in Sources */,
 				4732A7071D08A57B00877738 /* UserListTableViewController.swift in Sources */,
 				D841BBDD1D02CDF800CA7894 /* LoginExtension.swift in Sources */,
 				D841BBDF1D05739400CA7894 /* UdacityAPIManager.swift in Sources */,

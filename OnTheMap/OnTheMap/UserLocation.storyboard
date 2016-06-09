@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mo5-J6-XSk">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--User Location View Controller-->
+        <scene sceneID="mKh-B4-wIt">
+            <objects>
+                <viewController id="mo5-J6-XSk" customClass="UserLocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="x2n-QR-rwq"/>
+                        <viewControllerLayoutGuide type="bottom" id="PkJ-Pq-pe4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="joy-54-SU3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter Your Location Here" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="p2A-g5-0dG">
+                                <rect key="frame" x="0.0" y="157" width="600" height="364"/>
+                                <color key="backgroundColor" red="0.4162174900488077" green="0.66760509195540707" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rHN-do-12f">
+                                <rect key="frame" x="233" y="53" width="135" height="81"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRD-BU-TFv">
+                                        <rect key="frame" x="0.0" y="0.0" width="135" height="27"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="23"/>
+                                        <color key="textColor" red="0.14509803921568629" green="0.15294117647058825" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="studying" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hv-fZ-DAM">
+                                        <rect key="frame" x="0.0" y="27" width="135" height="27"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="23"/>
+                                        <color key="textColor" red="0.1963026973" green="0.23525262760000001" blue="0.64725378789999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="today?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tID-lz-bG7">
+                                        <rect key="frame" x="0.0" y="54" width="135" height="27"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="23"/>
+                                        <color key="textColor" red="0.14509803921568629" green="0.15294117647058825" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udZ-QM-KXJ">
+                                <rect key="frame" x="213" y="542" width="175" height="33"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="VcL-o0-HHK"/>
+                                    <constraint firstAttribute="width" constant="175" id="v5H-wv-dHg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Find on the Map">
+                                    <color key="titleColor" red="0.19630269730578251" green="0.23525262764690807" blue="0.64725378787878785" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="VcL-o0-HHK"/>
+                                    </mask>
+                                </variation>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPG-ab-NX0">
+                                <rect key="frame" x="553" y="12" width="42" height="29"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.30196078431372547" green="0.29803921568627451" blue="0.61960784313725492" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="mo5-J6-XSk" eventType="touchUpInside" id="N4a-x9-894"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.9423845591393939" green="0.9423845591393939" blue="0.9423845591393939" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="XPG-ab-NX0" secondAttribute="trailing" multiplier="0.975" constant="20" symbolic="YES" id="Fbm-4Z-mwb"/>
+                            <constraint firstAttribute="trailing" secondItem="p2A-g5-0dG" secondAttribute="trailing" id="IpO-yx-67X"/>
+                            <constraint firstItem="p2A-g5-0dG" firstAttribute="top" secondItem="rHN-do-12f" secondAttribute="bottom" multiplier="1.11" constant="8" symbolic="YES" id="NUu-al-ldx"/>
+                            <constraint firstItem="udZ-QM-KXJ" firstAttribute="centerX" secondItem="joy-54-SU3" secondAttribute="centerX" id="TJ3-C7-TcS"/>
+                            <constraint firstItem="udZ-QM-KXJ" firstAttribute="top" secondItem="p2A-g5-0dG" secondAttribute="bottom" multiplier="1.025" constant="8" symbolic="YES" id="YTv-FA-Lgm"/>
+                            <constraint firstItem="rHN-do-12f" firstAttribute="centerX" secondItem="joy-54-SU3" secondAttribute="centerX" id="Z7Q-4B-cO0"/>
+                            <constraint firstItem="p2A-g5-0dG" firstAttribute="leading" secondItem="joy-54-SU3" secondAttribute="leading" id="dFe-0j-Dtm"/>
+                            <constraint firstItem="XPG-ab-NX0" firstAttribute="top" secondItem="x2n-QR-rwq" secondAttribute="bottom" multiplier="0.2" constant="8" symbolic="YES" id="hXZ-JU-1ax"/>
+                            <constraint firstItem="rHN-do-12f" firstAttribute="top" secondItem="XPG-ab-NX0" secondAttribute="bottom" multiplier="1.1" constant="8" symbolic="YES" id="jPm-eB-LmC"/>
+                            <constraint firstItem="PkJ-Pq-pe4" firstAttribute="top" secondItem="udZ-QM-KXJ" secondAttribute="bottom" multiplier="1.03" constant="8" symbolic="YES" id="sM9-Yn-QAI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="findButton" destination="udZ-QM-KXJ" id="dx5-m3-lUU"/>
+                        <outlet property="textView" destination="p2A-g5-0dG" id="XnC-Zk-dgR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gbL-4z-jZC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="732" y="528"/>
+        </scene>
+    </scenes>
+</document>

@@ -48,7 +48,11 @@
                                     <action selector="refreshMapButtonTapped:" destination="BYZ-38-t0r" id="Jac-mN-c68"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="pin" id="xkc-Uj-7pE"/>
+                            <barButtonItem image="pin" id="xkc-Uj-7pE">
+                                <connections>
+                                    <segue destination="ZLA-t2-ZgH" kind="presentation" id="Qvz-YC-Q0Z"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -58,6 +62,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2625" y="154"/>
+        </scene>
+        <!--UserLocation-->
+        <scene sceneID="nd5-4F-Ts0">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UserLocation" id="ZLA-t2-ZgH" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S8b-zA-otG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3125.5" y="465"/>
         </scene>
         <!--On The Map-->
         <scene sceneID="Y8h-ej-Qag">
@@ -115,7 +127,11 @@
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="hL4-Ct-zi6"/>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="refresh" id="AKS-h6-Jjw"/>
-                            <barButtonItem image="pin" id="isU-qf-D6B"/>
+                            <barButtonItem image="pin" id="isU-qf-D6B">
+                                <connections>
+                                    <segue destination="ZLA-t2-ZgH" kind="presentation" id="gdv-ju-7of"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
@@ -185,4 +201,7 @@
         <image name="map" width="26" height="20"/>
         <image name="pin" width="15" height="22"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="gdv-ju-7of"/>
+    </inferredMetricsTieBreakers>
 </document>
