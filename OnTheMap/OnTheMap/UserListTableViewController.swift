@@ -11,7 +11,10 @@ import UIKit
 class UserListTableViewController: UITableViewController {
 
     let apiManager = Constants.sharedInstance()
-    
+    let udacityAPI = UdacityAPIManager.sharedInstance()
+
+    @IBOutlet var mapTableView: UITableView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -35,5 +38,27 @@ class UserListTableViewController: UITableViewController {
         cell.userURLLabel.text = userURL as? String
 
         return cell
+    }
+    
+    @IBAction func logoutButtonTapped(sender: UIBarButtonItem) {
+        
+        let controller =  UIStoryboard.init(name: "Login", bundle: nil).instantiateViewControllerWithIdentifier("kLoginID")
+        self.presentViewController(controller, animated: true, completion: nil)
+        
+        udacityAPI.logUserOut { (success, data, errorString) in
+            if success {
+                // Show spinner?
+            } else {
+                print("Error with logout process...")
+            }
+        }
+    }
+    
+    @IBAction func refreshButtonTapped(sender: UIBarButtonItem) {
+        
+        dispatch_async(dispatch_get_main_queue()) { 
+            
+            self.mapTableView.reloadData()
+        }
     }
 }

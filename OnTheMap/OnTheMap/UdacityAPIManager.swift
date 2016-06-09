@@ -7,18 +7,15 @@
 //
 
 import Foundation
+import MapKit
 
 class UdacityAPIManager: NSObject {
     
     // MARK: Properties
     var session = NSURLSession.sharedSession()
-    let constants = Constants()
+    let constants = Constants.sharedInstance()
     
     // Authentication state
-    var sessionID: String? = nil
-    var userKey: String? = nil
-    var firstName: String? = nil
-    var lastName: String? = nil
     
     func getSessionID(email: String, password: String, completionHandlerForToken: (success: Bool, data: AnyObject, errorString: String?) -> Void) {
         
@@ -43,8 +40,8 @@ class UdacityAPIManager: NSObject {
                 return
             }
             
-            self.sessionID = parsedResult["session"]!!["id"]!! as? String
-            self.userKey = parsedResult["account"]!!["key"]!! as? String
+            self.constants.sessionID = parsedResult["session"]!!["id"]!! as? String
+            self.constants.userKey = parsedResult["account"]!!["key"]!! as? String
             
             completionHandlerForToken(success: true, data: parsedResult, errorString: nil)
         }
@@ -53,7 +50,7 @@ class UdacityAPIManager: NSObject {
     
     func getUserData(completionHanderForToken: (success: Bool, data: AnyObject, errorString: String?) -> Void) {
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "\(constants.kUserKey)\(self.userKey!)")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(constants.kUserKey)\(self.constants.userKey!)")!)
         
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error...
@@ -61,7 +58,6 @@ class UdacityAPIManager: NSObject {
                 return
             }
             let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-            
             let parsedResult: AnyObject!
             do {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
@@ -70,8 +66,14 @@ class UdacityAPIManager: NSObject {
                 return
             }
             
-            self.firstName = parsedResult["user"]!!["first_name"]!! as? String
-            self.lastName = parsedResult["user"]!!["last_name"]!! as? String
+//            let lat = parsedResult["user"]!!["latitude"]!! as! Double
+//            let long = parsedResult["user"]!!["longitude"]!! as! Double
+//            
+//            print(lat, "\n")
+//            print(long)
+            
+            self.constants.firstName = parsedResult["user"]!!["first_name"]!! as? String
+            self.constants.lastName = parsedResult["user"]!!["last_name"]!! as? String
             
             completionHanderForToken(success: true, data: parsedResult, errorString: nil)
         }

@@ -14,6 +14,14 @@ class Constants: NSObject {
     var locations: [[String : AnyObject]] = []
     var userDataArray: [[String: AnyObject]] = []
     
+    // USER DATA
+    var firstName: String?
+    var lastName: String?
+    var sessionID: String?
+    var userKey: String?
+    var latitude: Double?
+    var longitude: Double?
+
     // UDACITY SITE URLS
     let kUdacitySignUp = "https://www.udacity.com/account/auth#!/signup"
     let kSession = "https://www.udacity.com/api/session"
