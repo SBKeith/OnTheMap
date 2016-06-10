@@ -40,8 +40,8 @@ class UdacityAPIManager: NSObject {
                 return
             }
             
-            self.constants.sessionID = parsedResult["session"]!!["id"]!! as? String
-            self.constants.userKey = parsedResult["account"]!!["key"]!! as? String
+            self.constants.newUserDataDictionary["sessionID"] = parsedResult["session"]!!["id"]!! as? String
+            self.constants.newUserDataDictionary["userKey"] = parsedResult["account"]!!["key"]!! as? String
             
             completionHandlerForToken(success: true, data: parsedResult, errorString: nil)
         }
@@ -50,7 +50,7 @@ class UdacityAPIManager: NSObject {
     
     func getUserData(completionHanderForToken: (success: Bool, data: AnyObject, errorString: String?) -> Void) {
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "\(constants.kUserKey)\(self.constants.userKey!)")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(constants.kUserKey)\(self.constants.newUserDataDictionary["userKey"]!)")!)
         
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error...
@@ -65,15 +65,8 @@ class UdacityAPIManager: NSObject {
                 print("Could not parse the data as JSON: '\(data)'")
                 return
             }
-            
-//            let lat = parsedResult["user"]!!["latitude"]!! as! Double
-//            let long = parsedResult["user"]!!["longitude"]!! as! Double
-//            
-//            print(lat, "\n")
-//            print(long)
-            
-            self.constants.firstName = parsedResult["user"]!!["first_name"]!! as? String
-            self.constants.lastName = parsedResult["user"]!!["last_name"]!! as? String
+            self.constants.newUserDataDictionary["firstName"] = parsedResult["user"]!!["first_name"]!! as? String
+            self.constants.newUserDataDictionary["lastName"] = parsedResult["user"]!!["last_name"]!! as? String
             
             completionHanderForToken(success: true, data: parsedResult, errorString: nil)
         }
