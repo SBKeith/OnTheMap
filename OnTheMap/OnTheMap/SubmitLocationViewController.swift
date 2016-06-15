@@ -108,9 +108,9 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        request.HTTPBody = "{\"uniqueKey\": \"\(dictionary["userKey"])\", \"firstName\": \"\(dictionary["firstName"])\", \"lastName\": \"\(dictionary["lastName"])\",\"mapString\": \"\(dictionary["newLoc"])\", \"mediaURL\": \(dictionary["mediaURL"]), \"latitude\": \(dictionary["lat"]), \"longitude\": \(dictionary["long"])}".dataUsingEncoding(NSUTF8StringEncoding)
+        request.HTTPBody = "{\"uniqueKey\": \"\(dictionary["userKey"]!)\", \"firstName\": \"\(dictionary["firstName"]!)\", \"lastName\": \"\(dictionary["lastName"]!)\",\"mapString\": \"\(dictionary["newLoc"]!)\", \"mediaURL\": \"\(dictionary["mediaURL"]!)\", \"latitude\": \(dictionary["lat"]!), \"longitude\": \(dictionary["long"]!)}".dataUsingEncoding(NSUTF8StringEncoding)
         
-        print("{\"uniqueKey\": \"\(dictionary["userKey"])\", \"firstName\": \"\(dictionary["firstName"])\", \"lastName\": \"\(dictionary["lastName"])\",\"mapString\": \"\(dictionary["newLoc"])\", \"mediaURL\": \(dictionary["mediaURL"]), \"latitude\": \(dictionary["lat"]), \"longitude\": \(dictionary["long"])}")
+//        print("{\"uniqueKey\": \"\(dictionary["userKey"]!)\", \"firstName\": \"\(dictionary["firstName"]!)\", \"lastName\": \"\(dictionary["lastName"]!)\",\"mapString\": \"\(dictionary["newLoc"]!)\", \"mediaURL\": \"\(dictionary["mediaURL"]!)\", \"latitude\": \(dictionary["lat"]!), \"longitude\": \(dictionary["long"]!)}")
 
         // OVERWRITE PREVIOUS LOCATION BEFORE SETTING NEW ON MAP!!  (below)
         
@@ -118,23 +118,15 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
         // User objectID to check if previous location has been store
         // If not, POST new data; otherwise, PUT new data via objectID...
         
-//        let session = NSURLSession.sharedSession()
-//
-//        let task = session.dataTaskWithRequest(request) { data, response, error in
-//            if error != nil { // Handle error…
-//                print(error)
-//            }
-//
-//            let parsedResult: AnyObject!
-//            do {
-//                parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
-//            } catch {
-//                print("Could not parse the data as JSON: '\(data)'")
-//                return
-//            }
-//
-//            print(parsedResult)
-//        }
-//        task.resume()
+        let session = NSURLSession.sharedSession()
+
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil { // Handle error…
+                print(error)
+            }
+            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+
+        }
+        task.resume()
     }
 }
