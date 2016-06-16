@@ -40,10 +40,16 @@ class UdacityAPIManager: NSObject {
                 return
             }
             
-            self.constants.newUserDataDictionary["sessionID"] = parsedResult["session"]!!["id"]!! as? String
-            self.constants.newUserDataDictionary["userKey"] = parsedResult["account"]!!["key"]!! as? String
+            if let p1 = parsedResult["session"]??["id"] as? String, let p2 = parsedResult["account"]??["key"] as? String {
+                self.constants.newUserDataDictionary["sessionID"] = p1
+                self.constants.newUserDataDictionary["userKey"] = p2
+            }
             
-            completionHandlerForToken(success: true, data: parsedResult, errorString: nil)
+            if let _ = self.constants.newUserDataDictionary["userKey"] as? String {
+                completionHandlerForToken(success: true, data: parsedResult, errorString: nil)
+            } else {
+                completionHandlerForToken(success: false, data: parsedResult, errorString: "Incorrect Email or Password.  Please try again.")
+            }
         }
         task.resume()
     }
@@ -65,6 +71,7 @@ class UdacityAPIManager: NSObject {
                 print("Could not parse the data as JSON: '\(data)'")
                 return
             }
+            
             self.constants.newUserDataDictionary["firstName"] = parsedResult["user"]!!["first_name"]!! as? String
             self.constants.newUserDataDictionary["lastName"] = parsedResult["user"]!!["last_name"]!! as? String
             
@@ -75,7 +82,7 @@ class UdacityAPIManager: NSObject {
     
     func logUserOut(completionHandlerForToken: (success: Bool, data: AnyObject, errorString: String?) -> Void) {
         
-        constants.userDataArray.removeAll()
+        constants.newUserDataDictionary = [:]
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
         request.HTTPMethod = "DELETE"

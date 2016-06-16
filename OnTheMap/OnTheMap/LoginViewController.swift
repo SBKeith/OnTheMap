@@ -21,6 +21,7 @@ class LoginViewController: UIViewController {
     
     let apiManager = UdacityAPIManager.sharedInstance()
     let constants = Constants()
+    let alert = AlertViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,11 +73,17 @@ class LoginViewController: UIViewController {
                             // Segue to new view controller (map view)
                             self.completeLogin()
                         } else {
-                            self.debugLabel.text = errorString
+                            print(errorString!)
                         }
                     })
                 } else {
-                    self.debugLabel.text = errorString
+                    dispatch_async(dispatch_get_main_queue(), {
+                        let alertMessage = self.alert.createAlertView("Incorrect username and/or password.", title: "Login Failure")
+                        self.presentViewController(alertMessage, animated: true, completion: {
+                            self.setUIEnabled(true)
+                            self.view.setNeedsDisplay()
+                        })
+                    })
                 }
             })
         }
