@@ -11,6 +11,7 @@
 		4732A7071D08A57B00877738 /* UserListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732A7061D08A57B00877738 /* UserListTableViewController.swift */; };
 		473FDC801D0715DD00F1788F /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473FDC7F1D0715DD00F1788F /* GCDBlackBox.swift */; };
 		473FDC821D07688200F1788F /* ParseAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473FDC811D07688200F1788F /* ParseAPIManager.swift */; };
+		478259611D147F2F00BAA816 /* StudentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478259601D147F2F00BAA816 /* StudentInfo.swift */; };
 		47F0830F1D120A6B009AA49E /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F0830E1D120A6B009AA49E /* AlertViewController.swift */; };
 		47F9C6511D0B447F0035C871 /* SubmitLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F9C6501D0B447F0035C871 /* SubmitLocationViewController.swift */; };
 		D841BBA61D02B71600CA7894 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBA51D02B71600CA7894 /* AppDelegate.swift */; };
@@ -51,6 +52,7 @@
 		4732A7061D08A57B00877738 /* UserListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListTableViewController.swift; sourceTree = "<group>"; };
 		473FDC7F1D0715DD00F1788F /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		473FDC811D07688200F1788F /* ParseAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAPIManager.swift; sourceTree = "<group>"; };
+		478259601D147F2F00BAA816 /* StudentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInfo.swift; sourceTree = "<group>"; };
 		47F0830E1D120A6B009AA49E /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		47F9C6501D0B447F0035C871 /* SubmitLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitLocationViewController.swift; sourceTree = "<group>"; };
 		D841BBA21D02B71600CA7894 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +177,7 @@
 				D841BBDE1D05739400CA7894 /* UdacityAPIManager.swift */,
 				473FDC811D07688200F1788F /* ParseAPIManager.swift */,
 				D841BBE01D06926D00CA7894 /* Constants.swift */,
+				478259601D147F2F00BAA816 /* StudentInfo.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				4732A7071D08A57B00877738 /* UserListTableViewController.swift in Sources */,
 				D841BBDD1D02CDF800CA7894 /* LoginExtension.swift in Sources */,
 				D841BBDF1D05739400CA7894 /* UdacityAPIManager.swift in Sources */,
+				478259611D147F2F00BAA816 /* StudentInfo.swift in Sources */,
 				D841BBA81D02B71600CA7894 /* MainViewController.swift in Sources */,
 				D841BBA61D02B71600CA7894 /* AppDelegate.swift in Sources */,
 				4732A7051D08A18700877738 /* CellLabelsUIView.swift in Sources */,

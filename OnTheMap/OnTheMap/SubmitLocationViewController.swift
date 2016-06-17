@@ -15,6 +15,7 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var submitButton: UIButton!
     
+    let studentInfo = Student(studentInfo: [:])
     let constants = Constants.sharedInstance()
     var annotations = [MKPointAnnotation]()
     
@@ -100,7 +101,7 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
     
     func setNewLocationForStudent() {
         
-        let dictionary = self.constants.newUserDataDictionary
+        let studentInfo = Student.init(studentInfo: self.constants.newUserDataDictionary)
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
         request.HTTPMethod = "POST"
@@ -108,9 +109,9 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        request.HTTPBody = "{\"uniqueKey\": \"\(dictionary["userKey"]!)\", \"firstName\": \"\(dictionary["firstName"]!)\", \"lastName\": \"\(dictionary["lastName"]!)\",\"mapString\": \"\(dictionary["newLoc"]!)\", \"mediaURL\": \"\(dictionary["mediaURL"]!)\", \"latitude\": \(dictionary["lat"]!), \"longitude\": \(dictionary["long"]!)}".dataUsingEncoding(NSUTF8StringEncoding)
+        request.HTTPBody = "{\"uniqueKey\": \"\(studentInfo!.userKey!)\", \"firstName\": \"\(studentInfo!.firstName!)\", \"lastName\": \"\(studentInfo!.lastName!)\",\"mapString\": \"\(studentInfo!.newLocation!)\", \"mediaURL\": \"\(studentInfo!.mediaURL!)\", \"latitude\": \(studentInfo!.lat!), \"longitude\": \(studentInfo!.long!)}".dataUsingEncoding(NSUTF8StringEncoding)
         
-//        print("{\"uniqueKey\": \"\(dictionary["userKey"]!)\", \"firstName\": \"\(dictionary["firstName"]!)\", \"lastName\": \"\(dictionary["lastName"]!)\",\"mapString\": \"\(dictionary["newLoc"]!)\", \"mediaURL\": \"\(dictionary["mediaURL"]!)\", \"latitude\": \(dictionary["lat"]!), \"longitude\": \(dictionary["long"]!)}")
+//        print("{\"uniqueKey\": \"\(studentInfo!.userKey!)\", \"firstName\": \"\(studentInfo!.firstName!)\", \"lastName\": \"\(studentInfo!.lastName!)\",\"mapString\": \"\(studentInfo!.newLocation!)\", \"mediaURL\": \"\(studentInfo!.mediaURL)\", \"latitude\": \(studentInfo!.lat!), \"longitude\": \(studentInfo!.long!)}")
 
         // OVERWRITE PREVIOUS LOCATION BEFORE SETTING NEW ON MAP!!  (below)
         

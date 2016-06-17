@@ -51,9 +51,9 @@ class UserLocationViewController: UIViewController, UITextViewDelegate {
     // MOVE TO MODEL SECTION
     func getLatLong(completionHandler: (success: Bool, error: String?) -> Void) {
         
-        constants.newUserDataDictionary["newLoc"] = locationTextView.text;
+        constants.newUserDataDictionary["newLocation"] = locationTextView.text;
         let geocoder:CLGeocoder = CLGeocoder();
-        geocoder.geocodeAddressString(constants.newUserDataDictionary["newLoc"] as! String) { (placemarks: [CLPlacemark]?, error: NSError?) -> Void in
+        geocoder.geocodeAddressString(constants.newUserDataDictionary["newLocation"] as! String) { (placemarks: [CLPlacemark]?, error: NSError?) -> Void in
             if placemarks?.count > 0 {
                 let topResult:CLPlacemark = placemarks![0];
                 let placemark: MKPlacemark = MKPlacemark(placemark: topResult);
