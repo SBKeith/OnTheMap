@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Activity Indicator View Controller-->
+        <scene sceneID="ziY-Nd-h8h">
+            <objects>
+                <viewController storyboardIdentifier="kActivityVC" id="6kI-wS-WMK" customClass="ActivityIndicatorViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="w5f-1U-M1B"/>
+                        <viewControllerLayoutGuide type="bottom" id="YNu-lV-aFQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Lc0-ef-giJ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="gbp-xe-lgS">
+                                <rect key="frame" x="282" y="281" width="37" height="37"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.54919270833333333" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="gbp-xe-lgS" firstAttribute="centerY" secondItem="Lc0-ef-giJ" secondAttribute="centerY" id="GCS-Zx-MiG"/>
+                            <constraint firstItem="gbp-xe-lgS" firstAttribute="centerX" secondItem="Lc0-ef-giJ" secondAttribute="centerX" id="hQK-Fl-IHS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activitySpinner" destination="gbp-xe-lgS" id="DAu-aE-6vQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aVd-OB-TMj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="620" y="293"/>
+        </scene>
+    </scenes>
+</document>

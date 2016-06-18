@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var debugLabel: UILabel!
+    @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
     
     let apiManager = UdacityAPIManager.sharedInstance()
     let constants = Constants()
@@ -50,6 +51,9 @@ class LoginViewController: UIViewController {
         
         userDidTapView(self)
         
+        activitySpinner.hidden = false
+        activitySpinner.startAnimating()
+        
         if emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
             debugLabel.text = "Username or Password Empty."
         } else {
@@ -66,13 +70,15 @@ class LoginViewController: UIViewController {
             
             // STEP 1:
             apiManager.getSessionID(emailTextField.text!, password: passwordTextField.text!, completionHandlerForToken: { (success, data, errorString) in
-                
+        
                 self.errorMsg = errorString
                 
                 if success {
                     // STEP 2:
                     self.apiManager.getUserData({ (success, data, errorString) in
                         if success {
+                            self.activitySpinner.hidden = true
+                            self.activitySpinner.stopAnimating()
                             // STEP 3:
                             // Segue to new view controller (map view)
                             self.completeLogin()

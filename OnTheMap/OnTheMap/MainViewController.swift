@@ -19,12 +19,21 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     let alert = AlertViewController()
     var annotations = [MKPointAnnotation]()
     
+    let activityVC = UIStoryboard.init(name: "ActivityIndicator", bundle: nil).instantiateViewControllerWithIdentifier("kActivityVC")
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        mapStudentCoordinates()
+        mapStudentCoordinates { (success) in
+            
+            if success {
+                
+            }
+        }
     }
     
-    func mapStudentCoordinates() {
+    func mapStudentCoordinates(completionHandler: (success: Bool) -> Void) {
+    
+        self.showViewController(activityVC, sender: nil)
         
         // Reset data array to avoid stacking new data on top of old!
         constants.userDataArray.removeAll()
@@ -78,11 +87,17 @@ class MainViewController: UIViewController, MKMapViewDelegate {
                 self.mapView.addAnnotations(self.annotations)
             })
         }
+        completionHandler(success: true)
     }
     
     @IBAction func refreshMapButtonTapped(sender: UIBarButtonItem) {
         
-        mapStudentCoordinates()
+        let vc = UIStoryboard.init(name: "ActivityIndicator", bundle: nil).instantiateViewControllerWithIdentifier("kActivityVC")
+        self.showViewController(vc, sender: nil)
+        
+        mapStudentCoordinates { (success) in
+            
+        }
     }
     
     @IBAction func logoutButtonTapped(sender: UIBarButtonItem) {

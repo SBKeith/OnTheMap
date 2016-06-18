@@ -30,10 +30,7 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func cancelButtonTapped(sender: UIButton) {
         
-        dismissViewControllerAnimated(true) {
-            // CHECK THIS - may fail
-            self.dismissViewControllerAnimated(true, completion: nil)
-        }
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
@@ -62,14 +59,16 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
         let long = dictionary["long"] as! Double
         
         // The lat and long are used to create a CLLocationCoordinates2D instance.
-        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        let span = MKCoordinateSpanMake(0.075, 0.075)
+        let coordinate = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: long), span: span)
+        mapView.setRegion(coordinate, animated: true)
         
         let first = dictionary["firstName"] as! String
         let last = dictionary["lastName"] as! String
         
         // Here we create the annotation and set its coordiate, title, and subtitle properties
         let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
+        annotation.coordinate = coordinate.center
         annotation.title = "\(first) \(last)"
         annotation.subtitle = constants.newUserDataDictionary["newLoc"] as? String
         

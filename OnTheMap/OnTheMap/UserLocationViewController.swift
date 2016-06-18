@@ -12,6 +12,7 @@ import MapKit
 class UserLocationViewController: UIViewController, UITextViewDelegate {
 
     let constants = Constants.sharedInstance()
+    let alert = AlertViewController()
     
     @IBOutlet weak var locationTextView: UITextView!
     @IBOutlet weak var findButton: UIButton!
@@ -43,7 +44,10 @@ class UserLocationViewController: UIViewController, UITextViewDelegate {
                 self.presentViewController(vc, animated: true, completion: nil)
             } else {
                 // SET ALERT VIEW HERE LATER
-                print(error)
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alertMessage = self.alert.createAlertView("Location not found.", title: "Search Error")
+                    self.presentViewController(alertMessage, animated: true, completion: nil)
+                })
             }
         }
     }

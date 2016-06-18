@@ -71,11 +71,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="n7R-DL-Mpw">
+                                <rect key="frame" x="282" y="410" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zvf-D9-WdX" firstAttribute="top" secondItem="eXz-zI-h0r" secondAttribute="bottom" constant="8" symbolic="YES" id="3SQ-Jp-fmH"/>
                             <constraint firstItem="g6o-Zu-QDD" firstAttribute="centerX" secondItem="QgZ-Ng-LaK" secondAttribute="centerX" id="84Q-10-ySG"/>
+                            <constraint firstItem="n7R-DL-Mpw" firstAttribute="centerX" secondItem="QgZ-Ng-LaK" secondAttribute="centerX" id="8Yj-kT-r10"/>
                             <constraint firstItem="g6o-Zu-QDD" firstAttribute="top" secondItem="zvf-D9-WdX" secondAttribute="bottom" constant="8" symbolic="YES" id="FcJ-F3-xfu"/>
                             <constraint firstItem="eXz-zI-h0r" firstAttribute="centerX" secondItem="QgZ-Ng-LaK" secondAttribute="centerX" id="JY6-08-CVt"/>
                             <constraint firstItem="Cfg-6i-pH2" firstAttribute="centerX" secondItem="QgZ-Ng-LaK" secondAttribute="centerX" id="KZC-BX-exX"/>
@@ -84,6 +89,7 @@
                             <constraint firstItem="eXz-zI-h0r" firstAttribute="width" secondItem="zvf-D9-WdX" secondAttribute="width" id="TSc-Jr-S76"/>
                             <constraint firstItem="m5k-1l-CpS" firstAttribute="top" secondItem="M99-Nn-bMN" secondAttribute="bottom" id="TXl-8p-Jt2"/>
                             <constraint firstItem="KYS-K2-ZeF" firstAttribute="top" secondItem="dRB-oC-fND" secondAttribute="bottom" constant="8" symbolic="YES" id="abw-oD-zKC"/>
+                            <constraint firstItem="n7R-DL-Mpw" firstAttribute="top" secondItem="g6o-Zu-QDD" secondAttribute="bottom" multiplier="1.05" constant="8" symbolic="YES" id="clo-Aj-sgl"/>
                             <constraint firstItem="Cfg-6i-pH2" firstAttribute="top" secondItem="g6o-Zu-QDD" secondAttribute="bottom" multiplier="1.1" constant="8" symbolic="YES" id="dec-QP-jbD"/>
                             <constraint firstItem="bbd-cV-APd" firstAttribute="centerX" secondItem="QgZ-Ng-LaK" secondAttribute="centerX" id="e9Q-BE-blE"/>
                             <constraint firstItem="bbd-cV-APd" firstAttribute="top" secondItem="g6o-Zu-QDD" secondAttribute="bottom" multiplier="1.2" constant="8" symbolic="YES" id="g5K-cC-kc0"/>
@@ -99,6 +105,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activitySpinner" destination="n7R-DL-Mpw" id="Iwj-aK-Xgk"/>
                         <outlet property="debugLabel" destination="Cfg-6i-pH2" id="WWa-5k-r89"/>
                         <outlet property="emailTextField" destination="eXz-zI-h0r" id="Aoy-rx-QX2"/>
                         <outlet property="loginButton" destination="g6o-Zu-QDD" id="ybz-9d-mXP"/>
