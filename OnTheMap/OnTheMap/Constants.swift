@@ -12,7 +12,7 @@ class Constants: NSObject {
     
     // DATA
     var locations: [[String : AnyObject]] = []
-    var userDataArray: [[String: AnyObject]] = []
+    var userDataArray: [[String : AnyObject]] = []
     
     // USER PROVIDED DATA
     var newUserDataDictionary: [String : AnyObject] = [:]

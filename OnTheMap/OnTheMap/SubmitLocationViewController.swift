@@ -17,6 +17,7 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
     
     let studentInfo = Student(studentInfo: [:])
     let constants = Constants.sharedInstance()
+    let alert = AlertViewController()
     var annotations = [MKPointAnnotation]()
     
     override func viewDidLoad() {
@@ -30,7 +31,8 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
     @IBAction func cancelButtonTapped(sender: UIButton) {
         
         dismissViewControllerAnimated(true) {
-            // segue to main VC?
+            // CHECK THIS - may fail
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
     
@@ -48,6 +50,7 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
         setNewLocationForStudent()
     }
     
+    // MOVE TO MODEL
     func mapStudentCoordinates() {
         
         // Reset data array to avoid stacking new data on top of old!
@@ -73,6 +76,7 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
         // Finally we place the annotation in an array of annotations.
         self.annotations.append(annotation)
     
+        // May need to complete in closure... (below)
         
         // When the array is complete, we add the annotations to the map.
         dispatch_async(dispatch_get_main_queue(), {
@@ -111,8 +115,6 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
 
         request.HTTPBody = "{\"uniqueKey\": \"\(studentInfo!.userKey!)\", \"firstName\": \"\(studentInfo!.firstName!)\", \"lastName\": \"\(studentInfo!.lastName!)\",\"mapString\": \"\(studentInfo!.newLocation!)\", \"mediaURL\": \"\(studentInfo!.mediaURL!)\", \"latitude\": \(studentInfo!.lat!), \"longitude\": \(studentInfo!.long!)}".dataUsingEncoding(NSUTF8StringEncoding)
         
-//        print("{\"uniqueKey\": \"\(studentInfo!.userKey!)\", \"firstName\": \"\(studentInfo!.firstName!)\", \"lastName\": \"\(studentInfo!.lastName!)\",\"mapString\": \"\(studentInfo!.newLocation!)\", \"mediaURL\": \"\(studentInfo!.mediaURL)\", \"latitude\": \(studentInfo!.lat!), \"longitude\": \(studentInfo!.long!)}")
-
         // OVERWRITE PREVIOUS LOCATION BEFORE SETTING NEW ON MAP!!  (below)
         
         // See if posting student location returns objectID in 'data' or 'response' JSON (task call below)
@@ -123,10 +125,11 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
 
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error…
-                print(error)
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alertMessage = self.alert.createAlertView("User data upload failed.", title: "Upload Error")
+                    self.presentViewController(alertMessage, animated: true, completion: nil)
+                })
             }
-            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-
         }
         task.resume()
     }
