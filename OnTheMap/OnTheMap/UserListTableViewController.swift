@@ -40,6 +40,15 @@ class UserListTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let url = NSURL(string: self.apiManager.userDataArray[indexPath.row]["mediaURL"]! as! String)
+        
+        if let url = url {
+            UIApplication.sharedApplication().openURL(url)
+        }
+    }
+    
     @IBAction func logoutButtonTapped(sender: UIBarButtonItem) {
         
         let controller =  UIStoryboard.init(name: "Login", bundle: nil).instantiateViewControllerWithIdentifier("kLoginID")

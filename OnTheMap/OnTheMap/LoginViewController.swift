@@ -22,6 +22,7 @@ class LoginViewController: UIViewController {
     let apiManager = UdacityAPIManager.sharedInstance()
     let constants = Constants()
     let alert = AlertViewController()
+    var errorMsg: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +66,9 @@ class LoginViewController: UIViewController {
             
             // STEP 1:
             apiManager.getSessionID(emailTextField.text!, password: passwordTextField.text!, completionHandlerForToken: { (success, data, errorString) in
+                
+                self.errorMsg = errorString
+                
                 if success {
                     // STEP 2:
                     self.apiManager.getUserData({ (success, data, errorString) in
@@ -77,17 +81,23 @@ class LoginViewController: UIViewController {
                         }
                     })
                 } else {
+                    if self.errorMsg == "sessionID" {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            let alertMessage = self.alert.createAlertView("Failed to establish connection.", title: "Connectivity Error")
+                            self.presentViewController(alertMessage, animated: true, completion: {
+                                self.setUIEnabled(true)
+                            })
+                        })
+                    }
                     dispatch_async(dispatch_get_main_queue(), {
                         let alertMessage = self.alert.createAlertView("Incorrect username and/or password.", title: "Login Failure")
                         self.presentViewController(alertMessage, animated: true, completion: {
                             self.setUIEnabled(true)
-                            self.view.setNeedsDisplay()
                         })
                     })
                 }
             })
         }
-
     }
     
     private func completeLogin() {

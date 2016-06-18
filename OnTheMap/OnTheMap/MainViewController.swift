@@ -13,9 +13,10 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
-    let apiManager = ParseAPIManager.sharedInstance()
+    let parseAPI = ParseAPIManager.sharedInstance()
     let udacityAPI = UdacityAPIManager.sharedInstance()
     let constants = Constants.sharedInstance()
+    let alert = AlertViewController()
     var annotations = [MKPointAnnotation]()
     
     override func viewWillAppear(animated: Bool) {
@@ -29,12 +30,16 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         constants.userDataArray.removeAll()
         self.mapView.removeAnnotations(annotations)
         
-        apiManager.getStudentLocations { (success, data, error) in
+        parseAPI.getStudentLocations { (success, data, error) in
             if success {
                 self.constants.locations = data as! [[String: AnyObject]]
             } else {
                 // Display error message
-                print("TEMP ERROR MESSAGE: NO LOCATIONS FOUND")
+                
+                dispatch_async(dispatch_get_main_queue(), { 
+                    let alertMessage = self.alert.createAlertView("User data download failed.", title: "Download Error")
+                    self.presentViewController(alertMessage, animated: true, completion: nil)
+                })
             }
             
             // We will create an MKPointAnnotation for each dictionary in "locations". The

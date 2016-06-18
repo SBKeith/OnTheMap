@@ -27,7 +27,7 @@ class UdacityAPIManager: NSObject {
         
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error…
-                completionHandlerForToken(success: false, data: data!, errorString: "Login failed (sessionID).")
+                completionHandlerForToken(success: false, data: "", errorString: "sessionID")
                 return
             }
             let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
