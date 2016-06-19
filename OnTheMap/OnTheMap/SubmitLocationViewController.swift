@@ -14,6 +14,8 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var alertIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var alertView: UIView!
     
     let studentInfo = Student(studentInfo: [:])
     let constants = Constants.sharedInstance()
@@ -30,7 +32,12 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func cancelButtonTapped(sender: UIButton) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        let presentingViewController = self.presentingViewController
+        self.dismissViewControllerAnimated(false, completion: {
+            presentingViewController!.dismissViewControllerAnimated(true, completion: {})
+        })
+        
+        // Add observer to call 'refresh' on main screen (maybe observer for when THIS view is dismissed)
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
@@ -44,10 +51,36 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
             constants.newUserDataDictionary["mediaURL"] = textView.text
         }
         
-        setNewLocationForStudent()
+        alertIndicator.startAnimating()
+        alertView.hidden = false
+        alertIndicator.hidden = false
+        
+        setNewLocationForStudent { (success) in
+            if success {
+                self.stopAlert({ (success) in
+                    let presentingViewController = self.presentingViewController
+                    self.dismissViewControllerAnimated(false, completion: {
+                        presentingViewController!.dismissViewControllerAnimated(true, completion: {})
+                    })
+                })
+            }
+        }
     }
     
     // MOVE TO MODEL
+    
+    func startAlert() {
+        
+    }
+    
+    func stopAlert(completionHandler: (success:Bool) -> Void) {
+        self.alertIndicator.stopAnimating()
+        self.alertIndicator.hidden = true
+        self.alertView.hidden = true
+        
+        completionHandler(success: true)
+    }
+    
     func mapStudentCoordinates() {
         
         // Reset data array to avoid stacking new data on top of old!
@@ -102,7 +135,7 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
         return pinView
     }
     
-    func setNewLocationForStudent() {
+    func setNewLocationForStudent(completionHandler: (success: Bool) -> Void) {
         
         let studentInfo = Student.init(studentInfo: self.constants.newUserDataDictionary)
         
@@ -128,6 +161,8 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
                     let alertMessage = self.alert.createAlertView("User data upload failed.", title: "Upload Error")
                     self.presentViewController(alertMessage, animated: true, completion: nil)
                 })
+            } else if error == nil {
+                completionHandler(success: true)
             }
         }
         task.resume()

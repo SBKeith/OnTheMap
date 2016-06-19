@@ -18,6 +18,9 @@ class UserListTableViewController: UITableViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        activityIndicator.startAnimating()
+        activityIndicator.hidden = false
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -38,6 +41,11 @@ class UserListTableViewController: UITableViewController {
         cell.userNameLabel.text = userName as String
         cell.userURLLabel.text = userURL as? String
 
+        if indexPath.row == 10 {
+            activityIndicator.stopAnimating()
+            activityIndicator.hidden = true
+        }
+        
         return cell
     }
     
@@ -66,8 +74,10 @@ class UserListTableViewController: UITableViewController {
     
     @IBAction func refreshButtonTapped(sender: UIBarButtonItem) {
         
-        dispatch_async(dispatch_get_main_queue()) { 
-            
+        self.activityIndicator.startAnimating()
+        self.activityIndicator.hidden = false
+        
+        dispatch_async(dispatch_get_main_queue()) {
             self.mapTableView.reloadData()
         }
     }
