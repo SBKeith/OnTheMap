@@ -12,32 +12,28 @@ import MapKit
 class MainViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var activityView: UIView!
+    @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
     
     let parseAPI = ParseAPIManager.sharedInstance()
     let udacityAPI = UdacityAPIManager.sharedInstance()
     let constants = Constants.sharedInstance()
     let alert = AlertViewController()
     var annotations = [MKPointAnnotation]()
-    
-    let activityVC = UIStoryboard.init(name: "ActivityIndicator", bundle: nil).instantiateViewControllerWithIdentifier("kActivityVC")
-    
+        
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        mapStudentCoordinates { (success) in
-            
-            if success {
-                
-            }
-        }
+        mapStudentCoordinates()
     }
     
-    func mapStudentCoordinates(completionHandler: (success: Bool) -> Void) {
-    
-        self.showViewController(activityVC, sender: nil)
-        
+    func mapStudentCoordinates() {
+
         // Reset data array to avoid stacking new data on top of old!
         constants.userDataArray.removeAll()
         self.mapView.removeAnnotations(annotations)
+        
+        activitySpinner.startAnimating()
+        activityView.hidden = false
         
         parseAPI.getStudentLocations { (success, data, error) in
             if success {
@@ -85,19 +81,14 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             // When the array is complete, we add the annotations to the map.
             dispatch_async(dispatch_get_main_queue(), {
                 self.mapView.addAnnotations(self.annotations)
+                self.activityView.hidden = true
+                self.activitySpinner.stopAnimating()
             })
         }
-        completionHandler(success: true)
     }
     
     @IBAction func refreshMapButtonTapped(sender: UIBarButtonItem) {
-        
-        let vc = UIStoryboard.init(name: "ActivityIndicator", bundle: nil).instantiateViewControllerWithIdentifier("kActivityVC")
-        self.showViewController(vc, sender: nil)
-        
-        mapStudentCoordinates { (success) in
-            
-        }
+        mapStudentCoordinates()
     }
     
     @IBAction func logoutButtonTapped(sender: UIBarButtonItem) {

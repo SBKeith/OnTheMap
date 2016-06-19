@@ -14,9 +14,10 @@ class UserListTableViewController: UITableViewController {
     let udacityAPI = UdacityAPIManager.sharedInstance()
 
     @IBOutlet var mapTableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
