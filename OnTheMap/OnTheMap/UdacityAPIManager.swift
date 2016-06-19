@@ -13,17 +13,17 @@ class UdacityAPIManager: NSObject {
     
     // MARK: Properties
     var session = NSURLSession.sharedSession()
-    let constants = Constants.sharedInstance()
+    var variables = Variables.sharedInstance()
     
     // Authentication state
     
     func getSessionID(email: String, password: String, completionHandlerForToken: (success: Bool, data: AnyObject, errorString: String?) -> Void) {
         
-        let request = NSMutableURLRequest(URL: NSURL(string: constants.kSession)!)
-        request.HTTPMethod = constants.kMethod
-        request.addValue(constants.kApplication, forHTTPHeaderField: constants.kAccept)
-        request.addValue(constants.kApplication, forHTTPHeaderField: constants.kContent_type)
-        request.HTTPBody = constants.kHttpBody(email, password: password).dataUsingEncoding(NSUTF8StringEncoding)
+        let request = NSMutableURLRequest(URL: NSURL(string: kSession)!)
+        request.HTTPMethod = kMethod
+        request.addValue(kApplication, forHTTPHeaderField: kAccept)
+        request.addValue(kApplication, forHTTPHeaderField: kContent_type)
+        request.HTTPBody = variables.kHttpBody(email, password: password).dataUsingEncoding(NSUTF8StringEncoding)
         
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error…
@@ -41,11 +41,11 @@ class UdacityAPIManager: NSObject {
             }
             
             if let p1 = parsedResult["session"]??["id"] as? String, let p2 = parsedResult["account"]??["key"] as? String {
-                self.constants.newUserDataDictionary["sessionID"] = p1
-                self.constants.newUserDataDictionary["userKey"] = p2
+                self.variables.newUserDataDictionary["sessionID"] = p1
+                self.variables.newUserDataDictionary["userKey"] = p2
             }
             
-            if let _ = self.constants.newUserDataDictionary["userKey"] as? String {
+            if let _ = self.variables.newUserDataDictionary["userKey"] as? String {
                 completionHandlerForToken(success: true, data: parsedResult, errorString: nil)
             } else {
                 completionHandlerForToken(success: false, data: parsedResult, errorString: "Incorrect Email or Password.  Please try again.")
@@ -56,7 +56,7 @@ class UdacityAPIManager: NSObject {
     
     func getUserData(completionHanderForToken: (success: Bool, data: AnyObject, errorString: String?) -> Void) {
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "\(constants.kUserKey)\(self.constants.newUserDataDictionary["userKey"]!)")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(kUserKey)\(self.variables.newUserDataDictionary["userKey"]!)")!)
         
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error...
@@ -72,8 +72,8 @@ class UdacityAPIManager: NSObject {
                 return
             }
             
-            self.constants.newUserDataDictionary["firstName"] = parsedResult["user"]!!["first_name"]!! as? String
-            self.constants.newUserDataDictionary["lastName"] = parsedResult["user"]!!["last_name"]!! as? String
+            self.variables.newUserDataDictionary["firstName"] = parsedResult["user"]!!["first_name"]!! as? String
+            self.variables.newUserDataDictionary["lastName"] = parsedResult["user"]!!["last_name"]!! as? String
             
             completionHanderForToken(success: true, data: parsedResult, errorString: nil)
         }
@@ -82,7 +82,7 @@ class UdacityAPIManager: NSObject {
     
     func logUserOut(completionHandlerForToken: (success: Bool, data: AnyObject, errorString: String?) -> Void) {
         
-        constants.newUserDataDictionary = [:]
+        variables.newUserDataDictionary = [:]
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
         request.HTTPMethod = "DELETE"

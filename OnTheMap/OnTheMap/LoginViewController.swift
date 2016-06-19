@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
     
     let apiManager = UdacityAPIManager.sharedInstance()
-    let constants = Constants()
+    let variables = Variables.sharedInstance()
     let alert = AlertViewController()
     var errorMsg: String?
     
@@ -44,7 +44,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func signUpButtonTapped(sender: UIButton) {
         
-        UIApplication.sharedApplication().openURL(NSURL(string: constants.kUdacitySignUp)!)
+        UIApplication.sharedApplication().openURL(NSURL(string: kUdacitySignUp)!)
     }
     
     @IBAction func loginButtonTapped(sender: UIButton) {
@@ -77,8 +77,7 @@ class LoginViewController: UIViewController {
                     // STEP 2:
                     self.apiManager.getUserData({ (success, data, errorString) in
                         if success {
-                            self.activitySpinner.hidden = true
-                            self.activitySpinner.stopAnimating()
+                            self.stopActivityIndicator()
                             // STEP 3:
                             // Segue to new view controller (map view)
                             self.completeLogin()
@@ -99,6 +98,7 @@ class LoginViewController: UIViewController {
                         let alertMessage = self.alert.createAlertView("Incorrect username and/or password.", title: "Login Failure")
                         self.presentViewController(alertMessage, animated: true, completion: {
                             self.setUIEnabled(true)
+                            self.stopActivityIndicator()
                         })
                     })
                 }
@@ -114,7 +114,14 @@ class LoginViewController: UIViewController {
             self.presentViewController(controller, animated: true, completion: nil)
         }
     }
+    
+    // MARK: Helper Functions
+    func stopActivityIndicator() {
+        activitySpinner.hidden = true
+        activitySpinner.stopAnimating()
+    }
 }
+
 
 // MARK: - LoginViewController (Notifications)
 

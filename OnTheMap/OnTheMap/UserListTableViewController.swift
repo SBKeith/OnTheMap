@@ -10,7 +10,7 @@ import UIKit
 
 class UserListTableViewController: UITableViewController {
 
-    let apiManager = Constants.sharedInstance()
+    let variables = Variables.sharedInstance()
     let udacityAPI = UdacityAPIManager.sharedInstance()
 
     @IBOutlet var mapTableView: UITableView!
@@ -30,28 +30,26 @@ class UserListTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return apiManager.userDataArray.count
+        return variables.userDataArray.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let userName = "\(self.apiManager.userDataArray[indexPath.row]["firstName"]!) \(self.apiManager.userDataArray[indexPath.row]["lastName"]!)"
-        let userURL = self.apiManager.userDataArray[indexPath.row]["mediaURL"]!
+        let userName = "\(self.variables.userDataArray[indexPath.row]["firstName"]!) \(self.variables.userDataArray[indexPath.row]["lastName"]!)"
+        let userURL = self.variables.userDataArray[indexPath.row]["mediaURL"]!
    
         let cell = tableView.dequeueReusableCellWithIdentifier("kUserDetailsCell") as! CellLabelsUIView
         cell.userNameLabel.text = userName as String
         cell.userURLLabel.text = userURL as? String
 
-        if indexPath.row == 10 {
-            activityIndicator.stopAnimating()
-            activityIndicator.hidden = true
-        }
+        activityIndicator.stopAnimating()
+        activityIndicator.hidden = true
         
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let url = NSURL(string: self.apiManager.userDataArray[indexPath.row]["mediaURL"]! as! String)
+        let url = NSURL(string: self.variables.userDataArray[indexPath.row]["mediaURL"]! as! String)
         
         if let url = url {
             UIApplication.sharedApplication().openURL(url)

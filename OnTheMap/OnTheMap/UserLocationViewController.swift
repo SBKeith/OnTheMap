@@ -11,7 +11,7 @@ import MapKit
 
 class UserLocationViewController: UIViewController, UITextViewDelegate {
 
-    let constants = Constants.sharedInstance()
+    let variables = Variables.sharedInstance()
     let alert = AlertViewController()
     
     @IBOutlet weak var locationTextView: UITextView!
@@ -37,7 +37,7 @@ class UserLocationViewController: UIViewController, UITextViewDelegate {
     @IBAction func findButtonTapped(sender: UIButton) {
         
         // Get LAT / LONG
-        getLatLong { (success, error) in
+        variables.getLatLong(locationTextView.text) {(success, error) in
             if success {
                 // present new location submission VC
                 let vc = self.storyboard?.instantiateViewControllerWithIdentifier("kSubmitVC") as! SubmitLocationViewController
@@ -48,27 +48,6 @@ class UserLocationViewController: UIViewController, UITextViewDelegate {
                     let alertMessage = self.alert.createAlertView("Location not found.", title: "Search Error")
                     self.presentViewController(alertMessage, animated: true, completion: nil)
                 })
-            }
-        }
-    }
-    
-    // MOVE TO MODEL SECTION
-    func getLatLong(completionHandler: (success: Bool, error: String?) -> Void) {
-        
-        constants.newUserDataDictionary["newLocation"] = locationTextView.text;
-        let geocoder:CLGeocoder = CLGeocoder();
-        geocoder.geocodeAddressString(constants.newUserDataDictionary["newLocation"] as! String) { (placemarks: [CLPlacemark]?, error: NSError?) -> Void in
-            if placemarks?.count > 0 {
-                let topResult:CLPlacemark = placemarks![0];
-                let placemark: MKPlacemark = MKPlacemark(placemark: topResult);
-                let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
-                
-                self.constants.newUserDataDictionary["lat"] = coordinates.latitude
-                self.constants.newUserDataDictionary["long"] = coordinates.longitude
-                
-                completionHandler(success: true, error: nil)
-            } else {
-                completionHandler(success: false, error: "Location not found!")
             }
         }
     }

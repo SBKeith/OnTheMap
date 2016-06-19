@@ -12,7 +12,8 @@
 		473FDC801D0715DD00F1788F /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473FDC7F1D0715DD00F1788F /* GCDBlackBox.swift */; };
 		473FDC821D07688200F1788F /* ParseAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473FDC811D07688200F1788F /* ParseAPIManager.swift */; };
 		478259611D147F2F00BAA816 /* StudentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478259601D147F2F00BAA816 /* StudentInfo.swift */; };
-		478259651D15572D00BAA816 /* ActivityIndicator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 478259641D15572D00BAA816 /* ActivityIndicator.storyboard */; };
+		478259671D1710F500BAA816 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478259661D1710F500BAA816 /* Variables.swift */; };
+		478259691D17199000BAA816 /* SubmitLocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478259681D17199000BAA816 /* SubmitLocationExtension.swift */; };
 		47F0830F1D120A6B009AA49E /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F0830E1D120A6B009AA49E /* AlertViewController.swift */; };
 		47F9C6511D0B447F0035C871 /* SubmitLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F9C6501D0B447F0035C871 /* SubmitLocationViewController.swift */; };
 		D841BBA61D02B71600CA7894 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D841BBA51D02B71600CA7894 /* AppDelegate.swift */; };
@@ -54,7 +55,8 @@
 		473FDC7F1D0715DD00F1788F /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		473FDC811D07688200F1788F /* ParseAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAPIManager.swift; sourceTree = "<group>"; };
 		478259601D147F2F00BAA816 /* StudentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInfo.swift; sourceTree = "<group>"; };
-		478259641D15572D00BAA816 /* ActivityIndicator.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ActivityIndicator.storyboard; sourceTree = "<group>"; };
+		478259661D1710F500BAA816 /* Variables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
+		478259681D17199000BAA816 /* SubmitLocationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitLocationExtension.swift; sourceTree = "<group>"; };
 		47F0830E1D120A6B009AA49E /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		47F9C6501D0B447F0035C871 /* SubmitLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitLocationViewController.swift; sourceTree = "<group>"; };
 		D841BBA21D02B71600CA7894 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,7 +171,6 @@
 				D841BBD31D02B86100CA7894 /* Login.storyboard */,
 				D841BBA91D02B71600CA7894 /* Main.storyboard */,
 				D8C5B0641D093997000814AE /* UserLocation.storyboard */,
-				478259641D15572D00BAA816 /* ActivityIndicator.storyboard */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -181,6 +182,7 @@
 				473FDC811D07688200F1788F /* ParseAPIManager.swift */,
 				D841BBE01D06926D00CA7894 /* Constants.swift */,
 				478259601D147F2F00BAA816 /* StudentInfo.swift */,
+				478259661D1710F500BAA816 /* Variables.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -214,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				D841BBDC1D02CDF800CA7894 /* LoginExtension.swift */,
+				478259681D17199000BAA816 /* SubmitLocationExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -324,7 +327,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D841BBD41D02B86100CA7894 /* Login.storyboard in Resources */,
-				478259651D15572D00BAA816 /* ActivityIndicator.storyboard in Resources */,
 				D841BBB01D02B71600CA7894 /* LaunchScreen.storyboard in Resources */,
 				D8C5B0651D093997000814AE /* UserLocation.storyboard in Resources */,
 				D841BBAD1D02B71600CA7894 /* Assets.xcassets in Resources */,
@@ -355,6 +357,7 @@
 			files = (
 				473FDC821D07688200F1788F /* ParseAPIManager.swift in Sources */,
 				47F9C6511D0B447F0035C871 /* SubmitLocationViewController.swift in Sources */,
+				478259691D17199000BAA816 /* SubmitLocationExtension.swift in Sources */,
 				D841BBDA1D02B90B00CA7894 /* LoginViewController.swift in Sources */,
 				D8C5B0671D09451A000814AE /* UserLocationViewController.swift in Sources */,
 				4732A7071D08A57B00877738 /* UserListTableViewController.swift in Sources */,
@@ -362,6 +365,7 @@
 				D841BBDF1D05739400CA7894 /* UdacityAPIManager.swift in Sources */,
 				478259611D147F2F00BAA816 /* StudentInfo.swift in Sources */,
 				D841BBA81D02B71600CA7894 /* MainViewController.swift in Sources */,
+				478259671D1710F500BAA816 /* Variables.swift in Sources */,
 				D841BBA61D02B71600CA7894 /* AppDelegate.swift in Sources */,
 				4732A7051D08A18700877738 /* CellLabelsUIView.swift in Sources */,
 				D841BBE11D06926D00CA7894 /* Constants.swift in Sources */,

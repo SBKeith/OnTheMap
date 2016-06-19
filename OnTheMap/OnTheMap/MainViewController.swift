@@ -17,7 +17,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     
     let parseAPI = ParseAPIManager.sharedInstance()
     let udacityAPI = UdacityAPIManager.sharedInstance()
-    let constants = Constants.sharedInstance()
+    let variables = Variables.sharedInstance()
     let alert = AlertViewController()
     var annotations = [MKPointAnnotation]()
         
@@ -27,9 +27,8 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     }
     
     func mapStudentCoordinates() {
-
         // Reset data array to avoid stacking new data on top of old!
-        constants.userDataArray.removeAll()
+        variables.userDataArray.removeAll()
         self.mapView.removeAnnotations(annotations)
         
         activitySpinner.startAnimating()
@@ -37,7 +36,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         
         parseAPI.getStudentLocations { (success, data, error) in
             if success {
-                self.constants.locations = data as! [[String: AnyObject]]
+                self.variables.locations = data as! [[String: AnyObject]]
             } else {
                 // Display error message
                 
@@ -47,14 +46,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
                 })
             }
             
-            // We will create an MKPointAnnotation for each dictionary in "locations". The
-            // point f will be stored in this array, and then provided to the map view.
-            
-            // The "locations" array is loaded with the sample data below. We are using the dictionaries
-            // to create map annotations. This would be more stylish if the dictionaries were being
-            // used to create custom structs. Perhaps StudentLocation structs.
-            
-            for dictionary in self.constants.locations {
+            for dictionary in self.variables.locations {
                 
                 // Notice that the float values are being used to create CLLocationDegree values.
                 // This is a version of the Double type.
@@ -105,11 +97,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         }
     }
 
-    // MARK: - MKMapViewDelegate
-    
-    // Here we create a view with a "right callout accessory view". You might choose to look into other
-    // decoration alternatives. Notice the similarity between this method and the cellForRowAtIndexPath
-    // method in TableViewDataSource.
+    // MARK: - MKMapViewDelegates
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
         let reuseId = "pin"
@@ -127,9 +115,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         }
         return pinView
     }
-    
-    // This delegate method is implemented to respond to taps. It opens the system browser
-    // to the URL specified in the annotationViews subtitle property.
+
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.sharedApplication()
