@@ -50,6 +50,7 @@ class UserListTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let url = NSURL(string: self.studentsInfo.allStudentsArray[indexPath.row].mediaURL!)
         
         if let url = url {
