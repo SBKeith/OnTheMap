@@ -28,6 +28,10 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
         textView.text = "Enter a link to Share Here"
         textView.delegate = self
         mapStudentCoordinates()
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
     @IBAction func cancelButtonTapped(sender: UIButton) {
@@ -82,5 +86,21 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
             pinView!.annotation = annotation
         }
         return pinView
+    }
+    
+    // MARK: UITextFieldDelegate
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
 }

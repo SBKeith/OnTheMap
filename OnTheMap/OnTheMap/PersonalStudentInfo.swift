@@ -8,6 +8,10 @@
 
 import Foundation
 
+// This struct is ONLY for the data the user enters.  This struct does NOT contain the information of all students.  (This was misunderstood in the original review.)
+
+// Please refer to the 'AllStudents' struct, located in class 'StudentInformation' for the required fix.  This file (PersonalStudentInfo.swift) is designed to support the app user only; it is used in the class 'SubmitLocationViewController', within the 'setNewLocation' function call.
+
 struct Student {
     var firstName: String?
     var lastName: String?

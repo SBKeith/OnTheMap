@@ -12,7 +12,7 @@ import MapKit
 class Variables {
     
     // DATA
-    var locations: [[String : AnyObject]] = []
+    var locations: [StudentInformation.AllStudents] = []
     var userDataArray: [[String : AnyObject]] = []
     
     // USER PROVIDED DATA

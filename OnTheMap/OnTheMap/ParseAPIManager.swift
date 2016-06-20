@@ -11,10 +11,12 @@ import Foundation
 class ParseAPIManager: NSObject {
     
     let sharedVariables = Variables.sharedInstance()
+    let sharedStudents = StudentInformation.sharedInstance()
+    let alert = AlertViewController()
     
-    func getStudentLocations(completionHandler: (success: Bool, data: AnyObject?, error: String?) -> Void)  {
+    func getStudentLocations(completionHandler: (success: Bool, data: [StudentInformation.AllStudents], error: String?) -> Void)  {
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation?order=-updatedAt")!)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         
@@ -28,14 +30,15 @@ class ParseAPIManager: NSObject {
             do {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
             } catch {
-                print("Could not parse the data as JSON: '\(data)'")
+                completionHandler(success: false, data: self.sharedStudents.allStudentsArray, error: "Server Error")
                 return
             }
             
             for dictionary in parsedResult["results"] as! [[String: AnyObject]] {
-                self.sharedVariables.userDataArray.append(dictionary)
+                let singleStudent = StudentInformation.AllStudents.init(studentInfo: dictionary)
+                self.sharedStudents.allStudentsArray.append(singleStudent)
             }
-            completionHandler(success: true, data: self.sharedVariables.userDataArray, error: nil)
+            completionHandler(success: true, data: self.sharedStudents.allStudentsArray, error: nil)
         }
         task.resume()
     }

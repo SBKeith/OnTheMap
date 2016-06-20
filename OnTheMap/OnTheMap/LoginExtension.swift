@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-// MARK: - LoginViewController: UITextFieldDelegate
-
 extension LoginViewController: UITextFieldDelegate {
     
     // MARK: UITextFieldDelegate
