@@ -10,8 +10,8 @@ import UIKit
 
 class UserListTableViewController: UITableViewController {
 
-    let variables = Variables.sharedInstance()
     let udacityAPI = UdacityAPIManager.sharedInstance()
+    let studentsInfo = StudentInformation.sharedInstance()
 
     @IBOutlet var mapTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -30,16 +30,17 @@ class UserListTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return variables.userDataArray.count
+        return studentsInfo.allStudentsArray.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let userName = "\(self.variables.userDataArray[indexPath.row]["firstName"]!) \(self.variables.userDataArray[indexPath.row]["lastName"]!)"
-        let userURL = self.variables.userDataArray[indexPath.row]["mediaURL"]!
+        
+        let userName = "\(self.studentsInfo.allStudentsArray[indexPath.row].firstName!) \(self.studentsInfo.allStudentsArray[indexPath.row].lastName!)"
+        let userURL = self.studentsInfo.allStudentsArray[indexPath.row].mediaURL!
    
         let cell = tableView.dequeueReusableCellWithIdentifier("kUserDetailsCell") as! CellLabelsUIView
-        cell.userNameLabel.text = userName as String
-        cell.userURLLabel.text = userURL as? String
+        cell.userNameLabel.text = userName
+        cell.userURLLabel.text = userURL
 
         activityIndicator.stopAnimating()
         activityIndicator.hidden = true
@@ -49,7 +50,7 @@ class UserListTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let url = NSURL(string: self.variables.userDataArray[indexPath.row]["mediaURL"]! as! String)
+        let url = NSURL(string: self.studentsInfo.allStudentsArray[indexPath.row].mediaURL!)
         
         if let url = url {
             UIApplication.sharedApplication().openURL(url)

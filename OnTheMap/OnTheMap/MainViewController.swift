@@ -17,6 +17,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     
     let parseAPI = ParseAPIManager.sharedInstance()
     let udacityAPI = UdacityAPIManager.sharedInstance()
+    let studentsInfo = StudentInformation.sharedInstance()
     let variables = Variables.sharedInstance()
     let alert = AlertViewController()
     var annotations = [MKPointAnnotation]()
@@ -28,7 +29,8 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     
     func mapStudentCoordinates() {
         // Reset data array to avoid stacking new data on top of old!
-        variables.userDataArray.removeAll()
+        
+        studentsInfo.allStudentsArray.removeAll()
         self.mapView.removeAnnotations(annotations)
         
         activitySpinner.startAnimating()
@@ -36,33 +38,35 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         
         parseAPI.getStudentLocations { (success, data, error) in
             if success {
-                self.variables.locations = data as! [[String: AnyObject]]
+                self.variables.locations = data
             } else {
                 // Display error message
-                
-                dispatch_async(dispatch_get_main_queue(), { 
-                    let alertMessage = self.alert.createAlertView("User data download failed.", title: "Download Error")
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alertMessage = self.alert.createAlertView("User data download failed; there was an error with server communication.", title: "Data Error")
                     self.presentViewController(alertMessage, animated: true, completion: nil)
                 })
             }
-            
+    
             for dictionary in self.variables.locations {
                 
                 // Notice that the float values are being used to create CLLocationDegree values.
                 // This is a version of the Double type.
-                let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
-                let long = CLLocationDegrees(dictionary["longitude"] as! Double)
                 
-                // The lat and long are used to create a CLLocationCoordinates2D instance.
-                let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                let annotation = MKPointAnnotation()
                 
-                let first = dictionary["firstName"] as! String
-                let last = dictionary["lastName"] as! String
-                let mediaURL = dictionary["mediaURL"] as! String
+                if let lat = dictionary.lat, let long = dictionary.long {
+                    let latitude = CLLocationDegrees(lat)
+                    let longitude = CLLocationDegrees(long)
+                    
+                    // The lat and long are used to create a CLLocationCoordinates2D instance.
+                    let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    annotation.coordinate = coordinate
+                }
+                let first = dictionary.firstName!
+                let last = dictionary.lastName!
+                let mediaURL = dictionary.mediaURL!
                 
                 // Here we create the annotation and set its coordiate, title, and subtitle properties
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = coordinate
                 annotation.title = "\(first) \(last)"
                 annotation.subtitle = mediaURL
                 

@@ -16,6 +16,8 @@ class UserLocationViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var locationTextView: UITextView!
     @IBOutlet weak var findButton: UIButton!
+    @IBOutlet weak var activityView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +25,12 @@ class UserLocationViewController: UIViewController, UITextViewDelegate {
         findButton.layer.cornerRadius = 10
         locationTextView.delegate = self
         locationTextView.text = "Enter Your Location Here"
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
-    
+
     func textViewDidBeginEditing(textView: UITextView) {
         locationTextView.text = ""
     }
@@ -36,12 +42,16 @@ class UserLocationViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func findButtonTapped(sender: UIButton) {
         
+        self.startAlert()
+        
         // Get LAT / LONG
         variables.getLatLong(locationTextView.text) {(success, error) in
             if success {
-                // present new location submission VC
-                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("kSubmitVC") as! SubmitLocationViewController
-                self.presentViewController(vc, animated: true, completion: nil)
+                self.stopAlert({ (success) in
+                    // present new location submission VC
+                    let vc = self.storyboard?.instantiateViewControllerWithIdentifier("kSubmitVC") as! SubmitLocationViewController
+                    self.presentViewController(vc, animated: true, completion: nil)
+                })
             } else {
                 // SET ALERT VIEW HERE LATER
                 dispatch_async(dispatch_get_main_queue(), {
@@ -51,4 +61,35 @@ class UserLocationViewController: UIViewController, UITextViewDelegate {
             }
         }
     }
+    
+    // MARK: UITextFieldDelegate
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
+    func startAlert() {
+        activityIndicator.startAnimating()
+        activityView.hidden = false
+        activityIndicator.hidden = false
+    }
+    
+    func stopAlert(completionHandler: (success:Bool) -> Void) {
+        activityIndicator.stopAnimating()
+        activityIndicator.hidden = true
+        activityView.hidden = true
+        
+        completionHandler(success: true)
+    }
+
 }
