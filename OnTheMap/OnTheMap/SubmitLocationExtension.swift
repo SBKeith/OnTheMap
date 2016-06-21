@@ -33,8 +33,8 @@ extension SubmitLocationViewController {
         
         let dictionary = self.variables.newUserDataDictionary
         
-        let lat = dictionary["lat"] as! Double
-        let long = dictionary["long"] as! Double
+        let lat = dictionary["latitude"] as! Double
+        let long = dictionary["longitude"] as! Double
         
         // The lat and long are used to create a CLLocationCoordinates2D instance.
         let span = MKCoordinateSpanMake(0.075, 0.075)
@@ -61,35 +61,35 @@ extension SubmitLocationViewController {
         })
     }
 
-    func setNewLocationForStudent(completionHandler: (success: Bool) -> Void) {
-        
-        let studentInfo = Student.init(studentInfo: self.variables.newUserDataDictionary)
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: kParseURL)!)
-        request.HTTPMethod = "POST"
-        request.addValue(kParseApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue(kParseRestAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        request.HTTPBody = "{\"uniqueKey\": \"\(studentInfo!.userKey!)\", \"firstName\": \"\(studentInfo!.firstName!)\", \"lastName\": \"\(studentInfo!.lastName!)\",\"mapString\": \"\(studentInfo!.newLocation!)\", \"mediaURL\": \"\(studentInfo!.mediaURL!)\", \"latitude\": \(studentInfo!.lat!), \"longitude\": \(studentInfo!.long!)}".dataUsingEncoding(NSUTF8StringEncoding)
-        
-        // OVERWRITE PREVIOUS LOCATION BEFORE SETTING NEW ON MAP!!  (below)
-        // See if posting student location returns objectID in 'data' or 'response' JSON (task call below)
-        // User objectID to check if previous location has been store
-        // If not, POST new data; otherwise, PUT new data via objectID...
-        
-        let session = NSURLSession.sharedSession()
-        
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil { // Handle error…
-                dispatch_async(dispatch_get_main_queue(), {
-                    let alertMessage = self.alert.createAlertView("User data upload failed.", title: "Upload Error")
-                    self.presentViewController(alertMessage, animated: true, completion: nil)
-                })
-            } else if error == nil {
-                completionHandler(success: true)
-            }
-        }
-        task.resume()
-    }
+//    func setNewLocationForStudent(completionHandler: (success: Bool) -> Void) {
+//        
+//        let studentInfo = StudentInformation.AllStudents(studentInfo: self.variables.newUserDataDictionary)
+//        
+//        let request = NSMutableURLRequest(URL: NSURL(string: kParseURL)!)
+//        request.HTTPMethod = "POST"
+//        request.addValue(kParseApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
+//        request.addValue(kParseRestAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        
+//        request.HTTPBody = "{\"uniqueKey\": \"\(studentInfo.userKey!)\", \"firstName\": \"\(studentInfo.firstName!)\", \"lastName\": \"\(studentInfo.lastName!)\",\"mapString\": \"\(studentInfo.newLocation!)\", \"mediaURL\": \"\(studentInfo.mediaURL!)\", \"latitude\": \(studentInfo.lat!), \"longitude\": \(studentInfo.long!)}".dataUsingEncoding(NSUTF8StringEncoding)
+//        
+//        // OVERWRITE PREVIOUS LOCATION BEFORE SETTING NEW ON MAP!!  (below)
+//        // See if posting student location returns objectID in 'data' or 'response' JSON (task call below)
+//        // User objectID to check if previous location has been store
+//        // If not, POST new data; otherwise, PUT new data via objectID...
+//        
+//        let session = NSURLSession.sharedSession()
+//        
+//        let task = session.dataTaskWithRequest(request) { data, response, error in
+//            if error != nil { // Handle error…
+//                dispatch_async(dispatch_get_main_queue(), {
+//                    let alertMessage = self.alert.createAlertView("User data upload failed.", title: "Upload Error")
+//                    self.presentViewController(alertMessage, animated: true, completion: nil)
+//                })
+//            } else if error == nil {
+//                completionHandler(success: true)
+//            }
+//        }
+//        task.resume()
+//    }
 }

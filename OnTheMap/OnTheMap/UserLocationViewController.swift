@@ -53,10 +53,11 @@ class UserLocationViewController: UIViewController, UITextViewDelegate {
                     self.presentViewController(vc, animated: true, completion: nil)
                 })
             } else {
-                // SET ALERT VIEW HERE LATER
-                dispatch_async(dispatch_get_main_queue(), {
-                    let alertMessage = self.alert.createAlertView("Location not found.", title: "Search Error")
-                    self.presentViewController(alertMessage, animated: true, completion: nil)
+                self.stopAlert({ (success) in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        let alertMessage = self.alert.createAlertView("Location not found.", title: "Search Error")
+                        self.presentViewController(alertMessage, animated: true, completion: nil)
+                    })
                 })
             }
         }

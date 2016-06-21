@@ -17,7 +17,7 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var alertIndicator: UIActivityIndicatorView!
     @IBOutlet weak var alertView: UIView!
     
-    let studentInfo = Student(studentInfo: [:])
+    let parseAPI = ParseAPIManager.sharedInstance()
     let variables = Variables.sharedInstance()
     let alert = AlertViewController()
     var annotations = [MKPointAnnotation]()
@@ -57,13 +57,18 @@ class SubmitLocationViewController: UIViewController, UITextViewDelegate {
         
         startAlert()
         
-        setNewLocationForStudent { (success) in
+        parseAPI.setNewLocationForStudent { (success) in
             if success {
                 self.stopAlert({ (success) in
                     let presentingViewController = self.presentingViewController
                     self.dismissViewControllerAnimated(false, completion: {
                         presentingViewController!.dismissViewControllerAnimated(true, completion: {})
                     })
+                })
+            } else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alertMessage = self.alert.createAlertView("User data upload failed.", title: "Upload Error")
+                    self.presentViewController(alertMessage, animated: true, completion: nil)
                 })
             }
         }

@@ -11,7 +11,6 @@
 		4732A7071D08A57B00877738 /* UserListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4732A7061D08A57B00877738 /* UserListTableViewController.swift */; };
 		473FDC801D0715DD00F1788F /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473FDC7F1D0715DD00F1788F /* GCDBlackBox.swift */; };
 		473FDC821D07688200F1788F /* ParseAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473FDC811D07688200F1788F /* ParseAPIManager.swift */; };
-		478259611D147F2F00BAA816 /* PersonalStudentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478259601D147F2F00BAA816 /* PersonalStudentInfo.swift */; };
 		478259671D1710F500BAA816 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478259661D1710F500BAA816 /* Variables.swift */; };
 		478259691D17199000BAA816 /* SubmitLocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478259681D17199000BAA816 /* SubmitLocationExtension.swift */; };
 		47F0830F1D120A6B009AA49E /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F0830E1D120A6B009AA49E /* AlertViewController.swift */; };
@@ -55,7 +54,6 @@
 		4732A7061D08A57B00877738 /* UserListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListTableViewController.swift; sourceTree = "<group>"; };
 		473FDC7F1D0715DD00F1788F /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		473FDC811D07688200F1788F /* ParseAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAPIManager.swift; sourceTree = "<group>"; };
-		478259601D147F2F00BAA816 /* PersonalStudentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalStudentInfo.swift; sourceTree = "<group>"; };
 		478259661D1710F500BAA816 /* Variables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
 		478259681D17199000BAA816 /* SubmitLocationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitLocationExtension.swift; sourceTree = "<group>"; };
 		47F0830E1D120A6B009AA49E /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -183,7 +181,6 @@
 				D841BBDE1D05739400CA7894 /* UdacityAPIManager.swift */,
 				473FDC811D07688200F1788F /* ParseAPIManager.swift */,
 				D841BBE01D06926D00CA7894 /* Constants.swift */,
-				478259601D147F2F00BAA816 /* PersonalStudentInfo.swift */,
 				D80FA22B1D17C29900FE8FB8 /* StudentInformation.swift */,
 				478259661D1710F500BAA816 /* Variables.swift */,
 			);
@@ -366,7 +363,6 @@
 				4732A7071D08A57B00877738 /* UserListTableViewController.swift in Sources */,
 				D841BBDD1D02CDF800CA7894 /* LoginExtension.swift in Sources */,
 				D841BBDF1D05739400CA7894 /* UdacityAPIManager.swift in Sources */,
-				478259611D147F2F00BAA816 /* PersonalStudentInfo.swift in Sources */,
 				D841BBA81D02B71600CA7894 /* MainViewController.swift in Sources */,
 				478259671D1710F500BAA816 /* Variables.swift in Sources */,
 				D841BBA61D02B71600CA7894 /* AppDelegate.swift in Sources */,

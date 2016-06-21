@@ -43,8 +43,8 @@ class Variables {
                 let placemark: MKPlacemark = MKPlacemark(placemark: topResult);
                 let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
                 
-                self.newUserDataDictionary["lat"] = coordinates.latitude
-                self.newUserDataDictionary["long"] = coordinates.longitude
+                self.newUserDataDictionary["latitude"] = coordinates.latitude
+                self.newUserDataDictionary["longitude"] = coordinates.longitude
                 
                 completionHandler(success: true, error: nil)
             } else {

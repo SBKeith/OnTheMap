@@ -54,6 +54,36 @@ class ParseAPIManager: NSObject {
         task.resume()
     }
     
+    func setNewLocationForStudent(completionHandler: (success: Bool) -> Void) {
+        
+        let studentInfo = StudentInformation.AllStudents(studentInfo: self.sharedVariables.newUserDataDictionary)
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: kParseURL)!)
+        request.HTTPMethod = "POST"
+        request.addValue(kParseApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue(kParseRestAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        request.HTTPBody = "{\"uniqueKey\": \"\(studentInfo.userKey!)\", \"firstName\": \"\(studentInfo.firstName!)\", \"lastName\": \"\(studentInfo.lastName!)\",\"mapString\": \"\(studentInfo.newLocation!)\", \"mediaURL\": \"\(studentInfo.mediaURL!)\", \"latitude\": \(studentInfo.lat!), \"longitude\": \(studentInfo.long!)}".dataUsingEncoding(NSUTF8StringEncoding)
+        
+        // OVERWRITE PREVIOUS LOCATION BEFORE SETTING NEW ON MAP!!  (below)
+        // See if posting student location returns objectID in 'data' or 'response' JSON (task call below)
+        // User objectID to check if previous location has been store
+        // If not, POST new data; otherwise, PUT new data via objectID...
+        
+        let session = NSURLSession.sharedSession()
+        
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil {
+                completionHandler(success: false)
+            } else if error == nil {
+                completionHandler(success: true)
+            }
+        }
+        task.resume()
+    }
+
+    
     // MARK: Shared Instance
     class func sharedInstance() -> ParseAPIManager {
         struct Singleton {
