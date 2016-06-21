@@ -12,6 +12,7 @@ class UserListTableViewController: UITableViewController {
 
     let udacityAPI = UdacityAPIManager.sharedInstance()
     let studentsInfo = StudentInformation.sharedInstance()
+    let alert = AlertViewController()
 
     @IBOutlet var mapTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -19,8 +20,7 @@ class UserListTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        activityIndicator.startAnimating()
-        activityIndicator.hidden = false
+        checkData()
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -30,18 +30,19 @@ class UserListTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return studentsInfo.allStudentsArray.count
+        return studentsInfo.allStudentsArray!.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let userName = "\(self.studentsInfo.allStudentsArray[indexPath.row].firstName!) \(self.studentsInfo.allStudentsArray[indexPath.row].lastName!)"
-        let userURL = self.studentsInfo.allStudentsArray[indexPath.row].mediaURL!
-   
         let cell = tableView.dequeueReusableCellWithIdentifier("kUserDetailsCell") as! CellLabelsUIView
+
+        let userName = "\(self.studentsInfo.allStudentsArray![indexPath.row].firstName!) \(self.studentsInfo.allStudentsArray![indexPath.row].lastName!)"
+        let userURL = self.studentsInfo.allStudentsArray![indexPath.row].mediaURL!
+        
         cell.userNameLabel.text = userName
         cell.userURLLabel.text = userURL
-
+        
         activityIndicator.stopAnimating()
         activityIndicator.hidden = true
         
@@ -51,7 +52,7 @@ class UserListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        let url = NSURL(string: self.studentsInfo.allStudentsArray[indexPath.row].mediaURL!)
+        let url = NSURL(string: self.studentsInfo.allStudentsArray![indexPath.row].mediaURL!)
         
         if let url = url {
             UIApplication.sharedApplication().openURL(url)
@@ -74,11 +75,27 @@ class UserListTableViewController: UITableViewController {
     
     @IBAction func refreshButtonTapped(sender: UIBarButtonItem) {
         
+        checkData()
+    }
+    
+    func checkData() {
         self.activityIndicator.startAnimating()
         self.activityIndicator.hidden = false
         
         dispatch_async(dispatch_get_main_queue()) {
             self.mapTableView.reloadData()
+        }
+        
+        guard studentsInfo.allStudentsArray!.count != 0 else {
+            activityIndicator.stopAnimating()
+            activityIndicator.hidden = true
+            // Display error message
+            dispatch_async(dispatch_get_main_queue(), {
+                // Set and present the alert
+                let alertMessage = self.alert.createAlertView("User data download failed; there was an error with server communication.", title: "Data Error")
+                self.presentViewController(alertMessage, animated: true, completion: nil)
+            })
+            return
         }
     }
 }

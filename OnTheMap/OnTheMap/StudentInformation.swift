@@ -10,7 +10,7 @@ import Foundation
 
 class StudentInformation {
 
-    var allStudentsArray: [AllStudents] = []
+    var allStudentsArray: [AllStudents]? = []
 
     struct AllStudents {
         var firstName: String?

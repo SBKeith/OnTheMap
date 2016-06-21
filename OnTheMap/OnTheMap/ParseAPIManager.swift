@@ -30,26 +30,26 @@ class ParseAPIManager: NSObject {
             do {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
             } catch {
-                completionHandler(success: false, data: self.sharedStudents.allStudentsArray, error: "Server Error")
+                completionHandler(success: false, data: self.sharedStudents.allStudentsArray!, error: "Server Error")
                 return
             }
             
             guard (parsedResult["results"] as? [[String: AnyObject]]) != nil else {
-                completionHandler(success: false, data: self.sharedStudents.allStudentsArray, error: "Server Error")
+                completionHandler(success: false, data: self.sharedStudents.allStudentsArray!, error: "Server Error")
                 return
             }
             
                 for dictionary in parsedResult["results"] as! [[String: AnyObject]] {
                     
                     guard let _: AnyObject? = dictionary else {
-                        completionHandler(success: false, data: self.sharedStudents.allStudentsArray, error: "Server error")
+                        completionHandler(success: false, data: self.sharedStudents.allStudentsArray!, error: "Server error")
                         return
                     }
                     
                     let singleStudent = StudentInformation.AllStudents.init(studentInfo: dictionary)
-                    self.sharedStudents.allStudentsArray.append(singleStudent)
+                    self.sharedStudents.allStudentsArray!.append(singleStudent)
                 }
-                completionHandler(success: true, data: self.sharedStudents.allStudentsArray, error: nil)
+                completionHandler(success: true, data: self.sharedStudents.allStudentsArray!, error: nil)
             }
         task.resume()
     }

@@ -31,7 +31,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     func mapStudentCoordinates() {
         // Reset data array to avoid stacking new data on top of old!
         
-        studentsInfo.allStudentsArray.removeAll()
+        studentsInfo.allStudentsArray!.removeAll()
         self.mapView.removeAnnotations(annotations)
         
         activitySpinner.startAnimating()
@@ -43,13 +43,9 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             } else {
                 // Display error message
                 dispatch_async(dispatch_get_main_queue(), {
-                    // Jump back to login screen
-                    self.logoutButtonTapped(self.logoutButton)
-                    // Set the active view controller for UIAlertView to use
-                    let activeViewController = self.navigationController?.visibleViewController
                     // Set and present the alert
                     let alertMessage = self.alert.createAlertView("User data download failed; there was an error with server communication.", title: "Data Error")
-                    activeViewController?.presentViewController(alertMessage, animated: true, completion: nil)
+                    self.presentViewController(alertMessage, animated: true, completion: nil)
                 })
             }
     
@@ -98,7 +94,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         
         udacityAPI.logUserOut { (success, data, errorString) in
             if success {
-                // Show spinner?
+                // Do stuff
             } else {
                 print("Error with logout process...")
             }
