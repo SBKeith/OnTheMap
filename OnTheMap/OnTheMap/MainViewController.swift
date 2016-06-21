@@ -14,6 +14,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var activityView: UIView!
     @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
     
     let parseAPI = ParseAPIManager.sharedInstance()
     let udacityAPI = UdacityAPIManager.sharedInstance()
@@ -42,16 +43,19 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             } else {
                 // Display error message
                 dispatch_async(dispatch_get_main_queue(), {
+                    // Jump back to login screen
+                    self.logoutButtonTapped(self.logoutButton)
+                    // Set the active view controller for UIAlertView to use
+                    let activeViewController = self.navigationController?.visibleViewController
+                    // Set and present the alert
                     let alertMessage = self.alert.createAlertView("User data download failed; there was an error with server communication.", title: "Data Error")
-                    self.presentViewController(alertMessage, animated: true, completion: nil)
+                    activeViewController?.presentViewController(alertMessage, animated: true, completion: nil)
                 })
             }
     
             for dictionary in self.variables.locations {
-                
                 // Notice that the float values are being used to create CLLocationDegree values.
                 // This is a version of the Double type.
-                
                 let annotation = MKPointAnnotation()
                 
                 if let lat = dictionary.lat, let long = dictionary.long {

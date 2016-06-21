@@ -17,8 +17,8 @@ class ParseAPIManager: NSObject {
     func getStudentLocations(completionHandler: (success: Bool, data: [StudentInformation.AllStudents], error: String?) -> Void)  {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation?order=-updatedAt")!)
-        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue(kParseApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue(kParseRestAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
@@ -34,17 +34,23 @@ class ParseAPIManager: NSObject {
                 return
             }
             
-            if let parsedResult = parsedResult {
+            guard (parsedResult["results"] as? [[String: AnyObject]]) != nil else {
+                completionHandler(success: false, data: self.sharedStudents.allStudentsArray, error: "Server Error")
+                return
+            }
+            
                 for dictionary in parsedResult["results"] as! [[String: AnyObject]] {
+                    
+                    guard let _: AnyObject? = dictionary else {
+                        completionHandler(success: false, data: self.sharedStudents.allStudentsArray, error: "Server error")
+                        return
+                    }
+                    
                     let singleStudent = StudentInformation.AllStudents.init(studentInfo: dictionary)
                     self.sharedStudents.allStudentsArray.append(singleStudent)
                 }
                 completionHandler(success: true, data: self.sharedStudents.allStudentsArray, error: nil)
-            } else {
-                completionHandler(success: false, data: self.sharedStudents.allStudentsArray, error: "Server Error")
             }
-            
-                    }
         task.resume()
     }
     
