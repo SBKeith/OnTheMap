@@ -34,12 +34,17 @@ class ParseAPIManager: NSObject {
                 return
             }
             
-            for dictionary in parsedResult["results"] as! [[String: AnyObject]] {
-                let singleStudent = StudentInformation.AllStudents.init(studentInfo: dictionary)
-                self.sharedStudents.allStudentsArray.append(singleStudent)
+            if let parsedResult = parsedResult {
+                for dictionary in parsedResult["results"] as! [[String: AnyObject]] {
+                    let singleStudent = StudentInformation.AllStudents.init(studentInfo: dictionary)
+                    self.sharedStudents.allStudentsArray.append(singleStudent)
+                }
+                completionHandler(success: true, data: self.sharedStudents.allStudentsArray, error: nil)
+            } else {
+                completionHandler(success: false, data: self.sharedStudents.allStudentsArray, error: "Server Error")
             }
-            completionHandler(success: true, data: self.sharedStudents.allStudentsArray, error: nil)
-        }
+            
+                    }
         task.resume()
     }
     
